@@ -12,6 +12,7 @@ const ProductCard = ({ product, handleEdit, handleDelete, handleTagClick }) => {
   const router = useRouter();
 
   const [copied, setCopied] = useState("");
+  const [submitting, setIsSubmitting] = useState(false);
 
   const handleProfileClick = () => {
     // console.log(product);
@@ -25,6 +26,37 @@ const ProductCard = ({ product, handleEdit, handleDelete, handleTagClick }) => {
     setCopied(product.productName);
     navigator.clipboard.writeText(product.productName);
     setTimeout(() => setCopied(false), 3000);
+  };
+
+  const buyProduct = async (e) => {
+    // e.preventDefault();
+    setIsSubmitting(true);
+    alert("Work in progress");
+
+    try {
+    // const response = await fetch("/api/product/new", {
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //   productName: product.productName,
+    //   description: product.description,
+    //   metaData: product.metaData,
+    //   price: product.price,
+    //   coverImage: product.coverImage,
+    //   thumbnail: product.thumbnail,
+    //   category: product.category,
+    //   cta: product.cta,
+    //   userId: session?.user.id,
+    //   }),
+    // });
+
+    if (response.ok) {
+      router.push("/");
+    }
+    } catch (error) {
+    console.log(error);
+    } finally {
+    setIsSubmitting(false);
+    }
   };
 
   return (
@@ -68,13 +100,26 @@ const ProductCard = ({ product, handleEdit, handleDelete, handleTagClick }) => {
       />
 
       <p className='my-4 font-satoshi text-sm text-gray-700'>{product.productName}</p>
-      <p
-        className='font-inter text-sm blue_gradient cursor-pointer'
-        onClick={() => handleTagClick && handleTagClick(product.metaData)}
-      >
-        {/* remove if metaData starts with "#" */}
-        #{product.metaData.replace(/^#/, '')} 
-      </p>
+      <div className="flex justify-between w-full">
+        <p
+          className='font-inter text-sm blue_gradient cursor-pointer'
+          onClick={() => handleTagClick && handleTagClick(product.metaData)}
+        >
+          {/* remove if metaData starts with "#" */}
+          #{product.metaData.replace(/^#/, '')} 
+        </p>
+
+        <span className="w-fit -mt-1.5">
+          <button
+            type='submit'
+            disabled={submitting}
+            onClick={() => buyProduct()}
+            className='px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white whitespace-nowrap'
+          >
+            {product.cta}
+          </button>
+        </span>
+      </div>
 
       {session?.user.id === product.creator._id && pathName === "/profile" && (
         <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>
