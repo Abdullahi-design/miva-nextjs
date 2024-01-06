@@ -19,7 +19,7 @@ const MyProfile = () => {
       const data = await response.json();
 
       setMyProducts(data);
-      console.log(data)
+      // console.log(data)
     };
 
     if (session?.user.id) fetchProducts();

@@ -14,7 +14,7 @@ const ProductCard = ({ product, handleEdit, handleDelete, handleTagClick }) => {
   const [copied, setCopied] = useState("");
 
   const handleProfileClick = () => {
-    console.log(product);
+    // console.log(product);
 
     if (product.creator._id === session?.user.id) return router.push("/profile");
 
