@@ -108,17 +108,18 @@ const ProductCard = ({ product, handleEdit, handleDelete, handleTagClick }) => {
           {/* remove if metaData starts with "#" */}
           #{product.metaData.replace(/^#/, '')} 
         </p>
-
-        <span className="w-fit -mt-1.5">
-          <button
-            type='submit'
-            disabled={submitting}
-            onClick={() => buyProduct()}
-            className='px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white whitespace-nowrap'
-          >
-            {product.cta}
-          </button>
-        </span>
+        {pathName !== "/profile" && (
+          <span className="w-fit -mt-1.5">
+            <button
+              type='submit'
+              disabled={submitting}
+              onClick={() => buyProduct()}
+              className='px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white whitespace-nowrap'
+            >
+              {product.cta}
+            </button>
+          </span>
+        )}
       </div>
 
       {session?.user.id === product.creator._id && pathName === "/profile" && (
