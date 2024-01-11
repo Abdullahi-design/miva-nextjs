@@ -15,11 +15,15 @@ const ProductCard = ({ product, handleEdit, handleDelete, handleTagClick }) => {
   const [submitting, setIsSubmitting] = useState(false);
 
   const handleProfileClick = () => {
-    // console.log(product);
 
     if (product.creator._id === session?.user.id) return router.push("/profile");
 
     router.push(`/profile/${product.creator._id}?name=${product.creator.username}`);
+  };
+
+  const handleProductDetailsClick = () => {
+
+    router.push(`/products/${product._id}`);
   };
 
   const handleCopy = () => {
@@ -60,7 +64,7 @@ const ProductCard = ({ product, handleEdit, handleDelete, handleTagClick }) => {
   };
 
   return (
-    <div className='prompt_card'>
+    <div className='prompt_card' onClick={handleProductDetailsClick}>
       <div className='flex justify-between items-start gap-5'>
         <div
           className='flex-1 flex justify-start items-center gap-3 cursor-pointer'
