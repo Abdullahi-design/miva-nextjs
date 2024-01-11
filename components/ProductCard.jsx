@@ -64,7 +64,7 @@ const ProductCard = ({ product, handleEdit, handleDelete, handleTagClick }) => {
   };
 
   return (
-    <div className='prompt_card' onClick={handleProductDetailsClick}>
+    <div className='prompt_card'>
       <div className='flex justify-between items-start gap-5'>
         <div
           className='flex-1 flex justify-start items-center gap-3 cursor-pointer'
@@ -94,54 +94,56 @@ const ProductCard = ({ product, handleEdit, handleDelete, handleTagClick }) => {
 
       </div>
 
-      <Image
-        src={product.coverImage}
-        width={300}
-        height={300}
-        alt='Cover Image Preview'
-        className='mt-2 max-w-full h-auto object-contain rounded-md'
-             
-      />
+      <div onClick={handleProductDetailsClick} className="cursor-pointer">
+        <Image
+          src={product.coverImage}
+          width={300}
+          height={300}
+          alt='Cover Image Preview'
+          className='mt-2 max-w-full h-auto object-contain rounded-md'
+              
+        />
 
-      <p className='my-4 font-satoshi text-sm text-gray-700'>{product.productName}</p>
-      <div className="flex justify-between w-full">
-        <p
-          className='font-inter text-sm blue_gradient cursor-pointer'
-          onClick={() => handleTagClick && handleTagClick(product.metaData)}
-        >
-          {/* remove if metaData starts with "#" */}
-          #{product.metaData.replace(/^#/, '')} 
-        </p>
-        {pathName !== "/profile" && (
-          <span className="w-fit -mt-1.5">
-            <button
-              type='submit'
-              disabled={submitting}
-              onClick={() => buyProduct()}
-              className='px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white whitespace-nowrap'
+        <p className='my-4 font-satoshi text-sm text-gray-700'>{product.productName}</p>
+        <div className="flex justify-between w-full">
+          <p
+            className='font-inter text-sm blue_gradient cursor-pointer'
+            onClick={() => handleTagClick && handleTagClick(product.metaData)}
+          >
+            {/* remove if metaData starts with "#" */}
+            #{product.metaData.replace(/^#/, '')} 
+          </p>
+          {pathName !== "/profile" && (
+            <span className="w-fit -mt-1.5">
+              <button
+                type='submit'
+                disabled={submitting}
+                onClick={() => buyProduct()}
+                className='px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white whitespace-nowrap'
+              >
+                {product.cta}
+              </button>
+            </span>
+          )}
+        </div>
+
+        {session?.user.id === product.creator._id && pathName === "/profile" && (
+          <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>
+            <p
+              className='font-inter text-sm green_gradient cursor-pointer'
+              onClick={handleEdit}
             >
-              {product.cta}
-            </button>
-          </span>
+              Edit
+            </p>
+            <p
+              className='font-inter text-sm orange_gradient cursor-pointer'
+              onClick={handleDelete}
+            >
+              Delete
+            </p>
+          </div>
         )}
       </div>
-
-      {session?.user.id === product.creator._id && pathName === "/profile" && (
-        <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>
-          <p
-            className='font-inter text-sm green_gradient cursor-pointer'
-            onClick={handleEdit}
-          >
-            Edit
-          </p>
-          <p
-            className='font-inter text-sm orange_gradient cursor-pointer'
-            onClick={handleDelete}
-          >
-            Delete
-          </p>
-        </div>
-      )}
     </div>
   );
 };
