@@ -170,6 +170,10 @@
 }
 
 /* ProductInfo Component */
-.product_card_info {
-  @apply flex-1 break-inside-avoid rounded-lg border border-gray-300 bg-white/20 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter w-full h-fit;
+.product-card-info {
+  @apply flex-1 break-inside-avoid rounded-lg border border-gray-300 bg-white/20 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter w-full h-fit overflow-hidden;
+}
+
+.rich-text {
+  @apply mt-4 text-gray-700;
 }
