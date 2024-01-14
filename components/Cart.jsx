@@ -6,20 +6,35 @@ import { FiShoppingCart } from "react-icons/fi";
 import { MdRemoveShoppingCart } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 import CartItem from "./CartItem";
+import { useRouter } from "next/navigation";
 
 const Cart = () => {
     const { items } = useCart();
     const itemCount = items.length;
-  
+    const router = useRouter()
+
     const [isMounted, setIsMounted] = useState(false);
     const [toggleCart, setToggleCart] = useState(false);
   
     useEffect(() => {
       setIsMounted(true);
-    }, []);
+    }, [items]);
 
-    const product = items.length > 0 ? items[0].product : null;
+    // const product = items.length > 0 ? items[0].product : null;
     // console.log(product.price);
+
+    const quantity = items.reduce((total, item) => total + item.quantity, 0);    
+
+    const checkout = () => {
+        try {
+            
+            router.push('/cart');
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setToggleCart(false)
+        };
+    }
 
     const cartTotal = items.reduce((total, { product }) => total + product.price, 0);
     const fee = 0;
@@ -58,7 +73,7 @@ const Cart = () => {
                             <div className="space-y-4">
                             {items.map(({ product }) => (
                                 <div className="py-2 border-b border-gray-300" key={product._id}>
-                                    <CartItem product={product} key={product._id} />
+                                    <CartItem product={product} quantity={quantity} key={product._id} />
                                         <div className="space-y-1.5 text-sm py-2">
                                             {product.category == 'physical product' && (
                                                 <div className="flex">
@@ -72,7 +87,7 @@ const Cart = () => {
                                             </div> */}
                                             <div className="flex">
                                                 <span className="flex-1">Total</span>
-                                                <span>₦{cartTotal + fee}</span>
+                                                <span>₦{(cartTotal + fee) * quantity}</span>
                                             </div>
                                         </div>
                                 </ div>
@@ -81,6 +96,7 @@ const Cart = () => {
                             <footer className="p-4 text-center">
                                 <button 
                                 className='w-full px-4 py-2 text-xl bg-primary-orange hover:bg-white hover:text-gray-700 border border-primary-orange rounded-md font-satoshi text-white'
+                                onClick={() => checkout(false)}
                                 >
                                     <Link href="/cart">Continue to Checkout</Link>
                                 </button>
