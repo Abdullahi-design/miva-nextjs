@@ -2,6 +2,8 @@
 
 import Image from 'next/image';
 import React from 'react';
+import AddToCartButton from './AddToCart';
+import Button from './ui/button';
 
 const ProductInfo = ({ product }) => {
   return (
@@ -41,14 +43,13 @@ const ProductInfo = ({ product }) => {
         </div>
 
         <div className='mt-4'>
-          <p className='w-fit px-4 py-2 border border-zinc-800 rounded-md font-satoshi text-xl text-gray-700'>₦{product.price}</p>
-          <button
-            type='submit'
-            // onClick={() => buyProduct()}
-            className='w-full px-4 py-2 text-sm bg-primary-orange rounded-md text-white mt-4'
-          >
-            {product.cta}
-          </button>
+          <p className='w-fit px-4 py-1.5 rounded-md font-satoshi text-xl text-gray-700'>₦{product.price}</p>
+          <div className='flex justify-around'>
+            <Button product={product}>
+              {product.cta}
+            </Button>
+            <AddToCartButton product={product}/>
+          </div>
         </div>
       </div>
     </div>

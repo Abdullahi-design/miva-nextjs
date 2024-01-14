@@ -1,4 +1,3 @@
-import ProductCard from "@components/ProductCard";
 import ProductInfo from "@components/ProductInfo";
 
 export async function generateStaticParams() {
