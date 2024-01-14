@@ -48,11 +48,11 @@ const CartItem = ({ product }) => {
             </div>
         </div>
 
-        {/* <div className='flex flex-col space-y-1 font-medium'>
+        <div className='flex flex-col space-y-1 font-medium'>
           <span className='ml-auto line-clamp-1 text-sm'>
           ₦{product.price}
           </span>
-        </div> */}
+        </div>
       </div>
     </div>
   )
