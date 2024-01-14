@@ -18,9 +18,9 @@ const RootLayout = ({ children }) => {
                     <div className='gradient' />
                 </div>
 
-                <main className='app'>
+                <main className='app relative flex flex-col min-h-screen'>
                     <Nav/>
-                    {children}
+                    <div className='flex-grow flex-1'>{children}</div>
                     <Footer/>
                 </main>
             </Provider>
