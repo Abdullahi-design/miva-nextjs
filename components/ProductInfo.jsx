@@ -15,7 +15,7 @@ const ProductInfo = ({ product }) => {
           width={1200}
           height={800}
           alt='Cover Image Preview'
-          className='object-cover rounded-md w-full h-full'
+          className='object-cover rounded-md '
         />
       </div>
 
