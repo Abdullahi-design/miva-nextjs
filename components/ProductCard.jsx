@@ -95,14 +95,14 @@ const ProductCard = ({ product, handleEdit, handleDelete, handleTagClick }) => {
       </div>
 
       <div onClick={handleProductDetailsClick} className="cursor-pointer">
-        <Image
-          src={product.coverImage}
-          width={300}
-          height={300}
-          alt='Cover Image Preview'
-          className='mt-2 max-w-full h-auto object-contain rounded-md'
-              
-        />
+        <div className="relative aspect-square mt-4 overflow-hidden rounded-lg">
+          <Image
+            src={product.coverImage}
+            alt={product.productName}
+            fill
+            className='relative object-cover'    
+          />
+        </div>
 
         <p className='my-4 font-satoshi text-sm text-gray-700'>{product.productName}</p>
         <div className="flex justify-between w-full">
