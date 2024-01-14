@@ -3,7 +3,6 @@ import { useCart } from "@app/hooks/use-cart";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FiShoppingCart } from "react-icons/fi";
-import Button from "./ui/button";
 import { MdRemoveShoppingCart } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 import CartItem from "./CartItem";
@@ -40,7 +39,7 @@ const Cart = () => {
             {toggleCart && (
                 <>
                     <div
-                    className="fixed z-10 inset-0 bg-opacity-50 bg-black backdrop-blur-lg"
+                    className="fixed z-10 inset-0 bg-opacity-5 bg-gray-100 backdrop-blur-sm"
                     onClick={() => setToggleCart(false)}
                     ></div>
                     <section className="fixed right-0 top-0 bottom-0 z-20 flex flex-col w-full sm:max-w-sm bg-white">
@@ -58,8 +57,8 @@ const Cart = () => {
                         <>
                             <div className="space-y-4">
                             {items.map(({ product }) => (
-                                <div className="py-2 border-b border-gray-300">
-                                    <CartItem product={product} key={product.id} />
+                                <div className="py-2 border-b border-gray-300" key={product._id}>
+                                    <CartItem product={product} key={product._id} />
                                         <div className="space-y-1.5 text-sm py-2">
                                             {product.category == 'physical product' && (
                                                 <div className="flex">
@@ -82,7 +81,6 @@ const Cart = () => {
                             <footer className="p-4 text-center">
                                 <button 
                                 className='w-full px-4 py-2 text-xl bg-primary-orange hover:bg-white hover:text-gray-700 border border-primary-orange rounded-md font-satoshi text-white'
-                                product={product}
                                 >
                                     <Link href="/cart">Continue to Checkout</Link>
                                 </button>
