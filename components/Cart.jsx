@@ -46,7 +46,7 @@ const Cart = () => {
                     aria-hidden="true"
                     className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                 />
-                <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
+                <span className="absolute ml-4 -top-2 text-xs bg-orange-600 text-white py-1 px-2 rounded-full ">
                     {isMounted ? itemCount : 0}
                 </span>
             </div>
@@ -108,7 +108,7 @@ const Cart = () => {
                             aria-hidden="true"
                             className="relative mb-4 h-fit w-fit text-muted-foreground"
                             >
-                            <MdRemoveShoppingCart className="w-20 h-20" />
+                                <MdRemoveShoppingCart className="w-20 h-20" />
                             </div>
                             <div className="text-xl font-semibold">Your cart is empty</div>
                         </div>
