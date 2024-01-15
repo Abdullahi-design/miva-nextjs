@@ -88,7 +88,7 @@ const Nav = () => {
               />
 
               {toggleDropdown && (
-                <div className='dropdown'>
+                <div className='dropdown z-30'>
                   <Link
                     href='/profile'
                     className='dropdown_link'
@@ -134,7 +134,7 @@ const Nav = () => {
             </>
           )}
         </div>
-        <Cart/>
+        {session?.user && (<Cart/>)}
       </section>
     </nav>
   );

@@ -1,23 +1,41 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { MdOutlineFileUpload } from "react-icons/md";
 
 const Form = ({ type, product, setProduct, submitting, handleSubmit }) => {
 
+  const [file, setFile] = useState(undefined)
+  const [fileUrl, setFileUrl] = useState(undefined)
+
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
+    const file = e.target.files?.[0];
+    setFile(file)
   
+    if (fileUrl) {
+      URL.revokeObjectURL(fileUrl)
+    }
+
     if (file) {
       // Read the selected image file and convert it to a data URL
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProduct({
-          ...product,
-          coverImage: reader.result, // Set the data URL, not the entire file object
-          imagePreview: reader.result,
-        });
-      };
-      reader.readAsDataURL(file);
+      // const reader = new FileReader();
+      // reader.onloadend = () => {
+      //   setProduct({
+      //     ...product,
+      //     coverImage: reader.result, // Set the data URL, not the entire file object
+      //     imagePreview: reader.result,
+      //   });
+      // };
+      // reader.readAsDataURL(file);
+
+      const url = URL.createObjectURL(file);
+      setFileUrl(url);
+      setProduct({
+        ...product,
+        coverImage: url
+      });
+    } else {
+      setFileUrl(undefined);
     }
   };  
 
@@ -54,7 +72,7 @@ const Form = ({ type, product, setProduct, submitting, handleSubmit }) => {
             Cover Image {" "}
           </span>
           {
-            product.imagePreview ? 
+            fileUrl ? 
             (
               null
             ):(
@@ -64,7 +82,7 @@ const Form = ({ type, product, setProduct, submitting, handleSubmit }) => {
           <input
             onChange={(e) => handleImageChange(e)}
             type='file'
-            accept="image/*"
+            accept="image/jpeg, image/png, image/webp, image/gif, video/mp4, video/webm"
             required
             className='hidden'
             id='coverImageInput'
@@ -78,14 +96,35 @@ const Form = ({ type, product, setProduct, submitting, handleSubmit }) => {
             </span>
             Upload Image
           </label>
-          {product.imagePreview && (
-            <Image
-              src={product.imagePreview}
-              width={300}
-              height={300}
-              alt='Cover Image Preview'
-              className='mt-2 max-w-full h-auto rounded-md'
-            />
+          {fileUrl && file && (
+            <div className="flex gap-4 items-center">
+              {file.type.startsWith("image/") ? (
+                <div className="rounded-lg overflow-hidden w-32 h-32 relative">
+                  <Image
+                    src={fileUrl}
+                    width={300}
+                    height={300}
+                    alt='Cover Image Preview'
+                    className='mt-2 max-w-full h-auto rounded-md'
+                  />
+                </div>
+              ):(
+                <div className="rounded-lg overflow-hidden w-32 h-32 relative">
+                  <video width={300} height={300} src={fileUrl} className="object-cover" autoPlay loop muted />
+                </div>
+              )}
+
+              <button
+                type="button"
+                className="border rounded-xl px-4 py-2"
+                onClick={() => {
+                  setFile(undefined)
+                  setFileUrl(undefined)
+                }}
+              >
+                remove
+              </button>
+            </div>
           )}
         </label>
 

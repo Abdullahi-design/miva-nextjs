@@ -72,7 +72,7 @@ const Feed = () => {
       <form className='relative w-full flex-center'>
         <input
           type='text'
-          placeholder='Search for a product'
+          placeholder='Search for a product or userName or SEO ketwords'
           value={searchText}
           onChange={handleSearchChange}
           required
@@ -82,10 +82,17 @@ const Feed = () => {
 
       {/* All Products */}
       {searchText ? (
-        <ProductCardList
-          data={searchedResults}
-          handleMetaDataClick={handleMetaDataClick}
-        />
+        searchedResults.length > 0 ? (
+          <ProductCardList
+            data={searchedResults}
+            handleMetaDataClick={handleMetaDataClick}
+          />
+        ) : (
+          <div className="mt-10 text-gray-600 text-center mx-auto">
+            <p>"{searchText}" Not found</p>
+            <span className="text-green-700">Try restructuring the words</span>
+          </div>
+        )
       ) : (
         <ProductCardList data={allProducts} handleMetaDataClick={handleMetaDataClick} />
       )}
