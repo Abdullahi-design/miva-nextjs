@@ -4,19 +4,14 @@ import Image from 'next/image';
 import React from 'react';
 import AddToCartButton from './AddToCart';
 import Button from './ui/button';
+import { displayMedia } from './displayMedia';
 
 const ProductInfo = ({ product }) => {
   return (
     <div className='product-card-info flex flex-col lg:flex-row lg:gap-8 border border-gray-300 rounded-lg overflow-hidden'>
 
-      <div className='lg:w-1/2 border-r border-gray-300'>
-        <Image
-          src={product.coverImage}
-          width={1200}
-          height={800}
-          alt='Cover Image Preview'
-          className='object-cover rounded-md '
-        />
+      <div className='lg:w-1/2 w-full border-r border-gray-300'>
+        {displayMedia(product)}
       </div>
 
       <div className='lg:w-1/2 p-6'>
@@ -44,7 +39,7 @@ const ProductInfo = ({ product }) => {
 
         <div className='mt-4'>
           <p className='w-fit px-4 py-1.5 rounded-md font-satoshi text-xl text-gray-700'>₦{product.price}</p>
-          <div className='flex justify-around'>
+          <div className='flex justify-between gap-3'>
             <Button product={product}>
               {product.cta}
             </Button>

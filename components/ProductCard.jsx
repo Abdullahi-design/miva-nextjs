@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import { FaRegStar, FaStar } from "react-icons/fa";
+import { displayMedia } from "./displayMedia";
 
 const ProductCard = ({ product, handleEdit, handleDelete, handleTagClick }) => {
   const { data: session } = useSession();
@@ -96,12 +97,7 @@ const ProductCard = ({ product, handleEdit, handleDelete, handleTagClick }) => {
 
       <div onClick={handleProductDetailsClick} className="cursor-pointer">
         <div className="relative aspect-square mt-4 overflow-hidden rounded-lg">
-          <Image
-            src={product.coverImage}
-            alt={product.productName}
-            fill
-            className='relative object-cover'    
-          />
+        {displayMedia(product)}
         </div>
 
         <p className='my-4 font-satoshi text-sm text-gray-700'>{product.productName}</p>
