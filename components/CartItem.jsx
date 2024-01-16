@@ -2,6 +2,7 @@ import { useCart } from '@app/hooks/use-cart';
 import Image from 'next/image';
 import { FaRegImage } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
+import { displayMedia } from './displayMedia';
 
 
 
@@ -15,20 +16,17 @@ const CartItem = ({ product, quantity }) => {
             <div className='flex items-start justify-between gap-4'>
                 <div className='flex items-center space-x-4'>
                     <div className='relative aspect-square h-16 w-16 min-w-fit overflow-hidden rounded'>
-                        {typeof product.coverImage == 'string' && product.coverImage ? (
-                        <Image
-                            src={product.coverImage}
-                            alt={product.productName}
-                            fill
-                            className='absolute object-cover'
-                        />
-                        ) : (
-                        <div className='flex h-full items-center justify-center bg-secondary'>
-                            <FaRegImage
-                            aria-hidden='true'
-                            className='h-4 w-4 text-muted-foreground'
-                            />
-                        </div>
+                        {product.coverImage ? (
+                            <div>
+                                {displayMedia(product)}
+                            </div>
+                            ) : (
+                            <div className='flex h-full items-center justify-center bg-secondary'>
+                                <FaRegImage
+                                aria-hidden='true'
+                                className='h-4 w-4 text-muted-foreground'
+                                />
+                            </div>
                         )}
                     </div>
 

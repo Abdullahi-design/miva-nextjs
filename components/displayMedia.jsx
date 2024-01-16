@@ -14,7 +14,10 @@ export const displayMedia = (product) => {
     } else if (product.coverImage.startsWith("data:video")) {
       return (
         <div className="rounded-lg overflow-hidden w-[20rem] h-[20rem] relative">
-          <video controls className="object-cover" autoPlay loop muted>
+          <video  
+          className="object-cover" 
+          autoPlay loop muted controls
+        >
             <source src={product.coverImage} type='video/mp4' />
             Your browser does not support the video tag.
           </video>
