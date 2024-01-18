@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { displayMedia } from "./displayMedia";
 
-const ProductCard = ({ product, handleEdit, handleDelete, handleTagClick }) => {
+const ProductCard = ({ product, handleAffiliate, handleEdit, handleDelete, handleMetaDataClick }) => {
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
@@ -95,8 +95,8 @@ const ProductCard = ({ product, handleEdit, handleDelete, handleTagClick }) => {
 
       </div>
 
-      <div onClick={handleProductDetailsClick} className="cursor-pointer">
-        <div className="relative aspect-square mt-4 overflow-hidden rounded-lg">
+      <div className="cursor-pointer">
+        <div onClick={handleProductDetailsClick} className="relative aspect-square mt-4 overflow-hidden rounded-lg">
         {displayMedia(product)}
         </div>
 
@@ -104,7 +104,7 @@ const ProductCard = ({ product, handleEdit, handleDelete, handleTagClick }) => {
         <div className="flex justify-between w-full">
           <p
             className='font-inter text-sm blue_gradient cursor-pointer'
-            onClick={() => handleTagClick && handleTagClick(product.metaData)}
+            onClick={() => handleMetaDataClick && handleMetaDataClick(product.metaData)}
           >
             {/* remove if metaData starts with "#" */}
             #{product.metaData.replace(/^#/, '')} 
@@ -125,6 +125,12 @@ const ProductCard = ({ product, handleEdit, handleDelete, handleTagClick }) => {
 
         {session?.user.id === product.creator._id && pathName === "/profile" && (
           <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>
+            <p
+              className='font-inter text-sm green_gradient cursor-pointer'
+              onClick={handleAffiliate}
+            >
+              Affiliate
+            </p>
             <p
               className='font-inter text-sm green_gradient cursor-pointer'
               onClick={handleEdit}

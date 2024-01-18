@@ -19,7 +19,8 @@ const EditProduct = () => {
         coverImage: "",
         thumbnail: "testing",
         category: "",
-        cta: ""
+        cta: "",
+        commission: 0
     });
 
     useEffect(() => {
@@ -36,6 +37,7 @@ const EditProduct = () => {
             thumbnail: data.thumbnail,
             category: data.category,
             cta: data.cta,
+            commission: 0
           });
         };
     
@@ -60,6 +62,7 @@ const EditProduct = () => {
             thumbnail: product.thumbnail,
             category: product.category,
             cta: product.cta,
+            commission: 0
             }),
         });
 
@@ -76,6 +79,7 @@ const EditProduct = () => {
     return (
         <Form
             type='Edit'
+            desc='Buy and sell anything you want'
             product={product}
             setProduct={setProduct}
             submitting={submitting}
