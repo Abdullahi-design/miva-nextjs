@@ -29,6 +29,9 @@ const MyProfile = () => {
     router.push(`/update-product?id=${product._id}`);
   };
 
+  const handleAffiliate = (product) => {
+    router.push(`/affiliate?id=${product._id}`);
+  };
   const handleDelete = async (product) => {
     const hasConfirmed = confirm(
       "Are you sure you want to delete this product?"
@@ -54,6 +57,7 @@ const MyProfile = () => {
       name='My'
       desc='Welcome to your personalized profile page. Share your exceptional products and inspire others with the power of your imagination'
       data={myProducts}
+      handleAffiliate={handleAffiliate}
       handleEdit={handleEdit}
       handleDelete={handleDelete}
     />
