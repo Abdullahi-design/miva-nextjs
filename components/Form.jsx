@@ -3,7 +3,7 @@ import { useState } from "react";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { displayMedia } from "./displayMedia";
 
-const Form = ({ type, product, setProduct, submitting, handleSubmit }) => {
+const Form = ({ type, desc, product, setProduct, submitting, handleSubmit }) => {
 
   const [file, setFile] = useState(undefined)
   // const [fileUrl, setFileUrl] = useState(undefined)
@@ -45,7 +45,7 @@ const Form = ({ type, product, setProduct, submitting, handleSubmit }) => {
         <span className='blue_gradient'>{type} your Product</span>
       </h1>
       <p className='desc text-left max-w-md'>
-        Buy and sell anything you want 
+        {desc}
       </p>
 
       <form

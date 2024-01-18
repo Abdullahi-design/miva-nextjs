@@ -76,6 +76,7 @@ const EditProduct = () => {
     return (
         <Form
             type='Edit'
+            desc='Buy and sell anything you want'
             product={product}
             setProduct={setProduct}
             submitting={submitting}

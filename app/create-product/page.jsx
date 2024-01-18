@@ -55,6 +55,7 @@ const CreateProduct = () => {
     return (
         <Form
             type='Create'
+            desc='Buy and sell anything you want'
             product={product}
             setProduct={setProduct}
             submitting={submitting}
