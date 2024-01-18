@@ -96,7 +96,21 @@ const Form = ({ type, desc, product, setProduct, submitting, handleSubmit }) => 
             </span>
             Upload Image
           </label>
-          {product.coverImage && file && (
+          {product.coverImage && file ? (
+            <div className="flex gap-4 mt-2 items-center">
+              {displayMedia(product)}
+              <button
+                type="button"
+                className="border rounded-xl px-4 py-2"
+                onClick={() => {
+                  setFile(undefined)
+                  // setFileUrl(undefined)
+                }}
+              >
+                remove
+              </button>
+            </div>
+          ): product.coverImage && (
             <div className="flex gap-4 mt-2 items-center">
               {displayMedia(product)}
               <button
