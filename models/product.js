@@ -37,6 +37,9 @@ const ProductSchema = new Schema({
         type: String,
         required: [true, 'Call to action is required.'],
     },
+    commission: {
+        type: Number,
+    },    
 });
 
 const Product = models.Product || model('Product', ProductSchema);
