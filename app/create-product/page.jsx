@@ -19,7 +19,8 @@ const CreateProduct = () => {
         coverImage: "",
         thumbnail: "testing",
         category: "",
-        cta: ""
+        cta: "",
+        commission: 0
     });
 
     const createProduct = async (e) => {
@@ -38,6 +39,7 @@ const CreateProduct = () => {
             thumbnail: product.thumbnail,
             category: product.category,
             cta: product.cta,
+            commission: product.commission,
             userId: session?.user.id,
             }),
         });

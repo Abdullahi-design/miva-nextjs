@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FiLoader } from "react-icons/fi";
 
-const AffiliateForm = ({ type, desc, product, setProduct, onRedirect }) => {
+const AffiliateForm = ({ type, desc, product }) => {
     const router = useRouter();
 
     const [commissionValues, setCommissionValues] = useState(Array(product.length).fill(""));

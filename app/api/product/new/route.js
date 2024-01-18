@@ -11,7 +11,8 @@ export const POST = async (request) => {
         coverImage, 
         thumbnail, 
         category, 
-        cta
+        cta,
+        commission
     } = await request.json();
 
     try {
@@ -25,11 +26,12 @@ export const POST = async (request) => {
             coverImage, 
             thumbnail, 
             category, 
-            cta
+            cta,
+            commission
         });
 
         await newProduct.save();
-        return new Response(JSON.stringify(newProduct), { status: 201 })
+        return new Response(JSON.stringify(newProduct), { status: 200 })
     } catch (error) {
         console.error("Error creating a new product:", error);
 
