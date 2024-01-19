@@ -30,7 +30,7 @@ const MyProfile = () => {
         <Discover
             name='Discover Products'
             desc='Pick a product, sell and make money'
-            data={myProducts}
+            product={myProducts}
         />
     );
 };
