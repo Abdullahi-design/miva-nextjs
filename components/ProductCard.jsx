@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { displayMedia } from "./displayMedia";
 
-const ProductCard = ({ product, handleAffiliate, handleEdit, handleDelete, handleMetaDataClick }) => {
+const ProductCard = ({ product, handleAffiliate,generateAffiliateLink,Issubmitting, handleEdit, handleDelete, handleMetaDataClick }) => {
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
@@ -118,6 +118,18 @@ const ProductCard = ({ product, handleAffiliate, handleEdit, handleDelete, handl
                 className='px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white whitespace-nowrap'
               >
                 {product.cta}
+              </button>
+            </span>
+          )}
+          {pathName == "/affiliated-products" && (
+            <span className="w-fit -mt-1.5">
+              <button
+                type='submit'
+                disabled={Issubmitting}
+                onClick={(e) => generateAffiliateLink(e, product)}
+                className='px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white whitespace-nowrap'
+              >
+                {Issubmitting ? 'Generating...' :'Generate affiliate link'}
               </button>
             </span>
           )}
