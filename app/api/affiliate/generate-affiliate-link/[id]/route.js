@@ -1,7 +1,27 @@
-// import Product from "@models/product";
+
 import AffiliateUser from "@models/userAffiliateProduct";
 import { connectToDB } from "@utils/database";
 import generateAffiliateLink from "@utils/generateAffiliateLink";
+import mongoose from 'mongoose';
+
+export const GET = async (request, { params }) => {
+    try {
+        await connectToDB()
+
+        const isValidObjectId = mongoose.Types.ObjectId.isValid(params.id);
+        if (!isValidObjectId) {
+            return new Response("Invalid Object ID", { status: 400 });
+        }
+
+        const product = await AffiliateUser.findOne({ userId: params.id })
+        if (!product) return new Response("Products Not Found", { status: 404 });
+
+        return new Response(JSON.stringify(product), { status: 200 })
+
+    } catch (error) {
+        return new Response("Internal Server Error", { status: 500 });
+    }
+}
 
 export const POST = async (request, { params }) => {
     const { userId, commission } = await request.json();
