@@ -1,7 +1,7 @@
 'use client'
 
 import { IoMdClose } from "react-icons/io";
-import { FaCheck } from "react-icons/fa6";
+import { FaCheck, FaRegImage } from "react-icons/fa6";
 import { FiLoader } from "react-icons/fi";
 import { MdRemoveShoppingCart } from "react-icons/md";
 import Image from 'next/image'
@@ -83,15 +83,32 @@ const Page = () => {
                       className='flex py-6 sm:py-10'>
                       <div className='flex-shrink-0'>
                         <div className='relative h-24 w-24'>
-                          {typeof product.coverImage == 'string' &&
-                          product.coverImage ? (
+                          {
+                          product.coverImage.startsWith("data:image") ? (
                             <Image
                               fill
                               src={product.coverImage}
-                              alt='product image'
+                              alt={product.productName}
                               className='h-full w-full rounded-md object-cover object-center sm:h-48 sm:w-48'
                             />
-                          ) : null}
+                          ) : product.coverImage.startsWith("data:video") ?(
+                            <div className="rounded-lg overflow-hidden -mt-4 -ml-8 w-[7rem] h-[7rem] relative">
+                              <video  
+                              className="object-cover" 
+                              autoPlay loop muted controls
+                            >
+                                <source src={product.coverImage} type='video/mp4' />
+                                Your browser does not support the video tag.
+                              </video>
+                            </div>
+                          ): (
+                            <div className='flex h-full items-center justify-center bg-secondary'>
+                              <FaRegImage
+                              aria-hidden='true'
+                              className='h-4 w-4 text-muted-foreground'
+                              />
+                            </div>
+                          )}
                         </div>
                       </div>
 
