@@ -1,12 +1,53 @@
 // ProductInfo.jsx
-
+"use client";
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import AddToCartButton from './AddToCart';
 import Button from './ui/button';
 import { displayMedia } from './displayMedia';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 const ProductInfo = ({ product }) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [submitting, setIsSubmitting] = useState(false);
+
+  const buyProduct = async () => {
+    // e.preventDefault();
+    setIsSubmitting(true);
+    
+    try {
+      
+      const affiliateId = searchParams.get("affiliateId");
+      
+      console.log("Affiliate ID:", affiliateId);
+      alert("Work in progress");
+
+      // const response = await fetch("/api/product/new", {
+      //   method: "POST",
+      //   body: JSON.stringify({
+      //   productName: product.productName,
+      //   description: product.description,
+      //   metaData: product.metaData,
+      //   price: product.price,
+      //   coverImage: product.coverImage,
+      //   thumbnail: product.thumbnail,
+      //   category: product.category,
+      //   cta: product.cta,
+      //   userId: session?.user.id,
+      //   }),
+      // });
+
+      // if (response.ok) {
+      //   router.push("/");
+      // }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className='product-card-info flex flex-col lg:flex-row lg:gap-8 border border-gray-300 rounded-lg overflow-hidden'>
 
@@ -40,7 +81,10 @@ const ProductInfo = ({ product }) => {
         <div className='mt-4'>
           <p className='w-fit px-4 py-1.5 rounded-md font-satoshi text-xl text-gray-700'>₦{product.price}</p>
           <div className='flex justify-between gap-3'>
-            <Button product={product}>
+            <Button 
+              product={product} 
+              buyProduct ={buyProduct}
+            >
               {product.cta}
             </Button>
             <AddToCartButton product={product}/>
