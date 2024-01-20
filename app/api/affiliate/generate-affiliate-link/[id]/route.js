@@ -13,7 +13,7 @@ export const GET = async (request, { params }) => {
             return new Response("Invalid Object ID", { status: 400 });
         }
 
-        const product = await AffiliateUser.findOne({ userId: params.id })
+        const product = await AffiliateUser.find({ userId: params.id })
         if (!product) return new Response("Products Not Found", { status: 404 });
 
         return new Response(JSON.stringify(product), { status: 200 })
@@ -42,12 +42,11 @@ export const POST = async (request, { params }) => {
                 userId,
                 commission,
                 productId,
-                affiliateLinks: [affiliateLink],
+                affiliateLink: affiliateLink,
             });
         } else {
             // If the affiliate product link already exists, update the commission and add the new affiliate link
-            affiliateProductLink.commission = commission;
-            affiliateProductLink.affiliateLinks.push(affiliateLink);
+            return new Response("Product already added", { status: 401 });
         }
 
         await affiliateProductLink.save();
