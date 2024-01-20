@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import Profile from "@components/Profile";
+import AffiliateForm from "@components/modal/AffiliateForm";
+import Loader from "@components/Loader";
 
 const MyProfile = () => {
   const router = useRouter();
@@ -12,6 +14,12 @@ const MyProfile = () => {
   
 
   const [myProducts, setMyProducts] = useState([]);
+  const [showAffiliateModal, setShowAffiliateModal] = useState(false);
+
+  const handleAffiliateClick = () => {
+    // handleAffiliate()
+    setShowAffiliateModal(true);
+  };
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -53,14 +61,29 @@ const MyProfile = () => {
   };
 
   return (
-    <Profile
-      name='My'
-      desc='Welcome to your personalized profile page. Share your exceptional products and inspire others with the power of your imagination'
-      data={myProducts}
-      handleAffiliate={handleAffiliate}
-      handleEdit={handleEdit}
-      handleDelete={handleDelete}
-    />
+    <>
+      <Profile
+        name='My'
+        desc='Welcome to your personalized profile page. Share your exceptional products and inspire others with the power of your imagination'
+        data={myProducts}
+        handleAffiliateClick={handleAffiliateClick}
+        handleEdit={handleEdit}
+        handleDelete={handleDelete}
+      />
+      {showAffiliateModal ? (
+        myProducts.map(product => (
+          <AffiliateForm
+          key={product._id}
+            product={product}
+            setShowAffiliateModal={setShowAffiliateModal}
+            type="commisson"
+            desc=""
+            onClose={() => setShowAffiliateModal(false)}
+            /* other necessary props for AffiliateForm */
+          />
+        ))
+      ): <Loader/>}
+    </>
   );
 };
 

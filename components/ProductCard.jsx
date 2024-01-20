@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { displayMedia } from "./displayMedia";
 
-const ProductCard = ({ product, handleAffiliate, generateAffiliateLink, Issubmitting, copyAffiliateLink, handleEdit, handleDelete, handleMetaDataClick }) => {
+const ProductCard = ({ product, handleAffiliateClick, generateAffiliateLink, Issubmitting, copyAffiliateLink, handleEdit, handleDelete, handleMetaDataClick }) => {
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
@@ -151,7 +151,7 @@ const ProductCard = ({ product, handleAffiliate, generateAffiliateLink, Issubmit
           <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>
             <p
               className='font-inter text-sm green_gradient cursor-pointer'
-              onClick={handleAffiliate}
+              onClick={handleAffiliateClick}
             >
               Affiliate
             </p>

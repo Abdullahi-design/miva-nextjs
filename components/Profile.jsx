@@ -1,10 +1,10 @@
 import Link from "next/link";
 import ProductCard from "./ProductCard";
 
-const Profile = ({ name, desc, data, handleAffiliate, handleEdit, handleDelete }) => {
+const Profile = ({ name, desc, data, handleAffiliateClick, handleEdit, handleDelete }) => {
 
   const items = [
-    { name: 'Affiliate', href: '/affiliate'},
+    { name: 'My Affiliate products', href: '/affiliate'},
     { name: 'Sales', href: '/sales'},
     { name: 'Analytics', href: '/analytics'},
   ]
@@ -33,7 +33,7 @@ const Profile = ({ name, desc, data, handleAffiliate, handleEdit, handleDelete }
           <ProductCard
             key={product._id}
             product={product}
-            handleAffiliate={() => handleAffiliate && handleAffiliate(product)}
+            handleAffiliateClick={() => handleAffiliateClick && handleAffiliateClick(product)}
             handleEdit={() => handleEdit && handleEdit(product)}
             handleDelete={() => handleDelete && handleDelete(product)}
           />
