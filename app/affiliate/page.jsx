@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import ProductCard from "@components/ProductCard";
+import { extractUserInfoFromAffiliateLink } from "@utils/generateAffiliateLink";
 
 const AffiliateProduct = () => {
     const searchParams = useSearchParams();
@@ -48,9 +49,17 @@ const AffiliateProduct = () => {
 
     const copyAffiliateLink = () => {
         if (affiliateLink) {
-          navigator.clipboard.writeText(affiliateLink);
-          // Optionally, you can show a notification or perform any other UI feedback
-          alert("Affiliate link copied to clipboard!");
+            
+            const affiliateProductLink = extractUserInfoFromAffiliateLink(affiliateLink);
+            if (affiliateProductLink) {
+
+                const URL = 'http://localhost:3000';
+                navigator.clipboard.writeText(`${URL}/products/${affiliateProductLink.productId}?affiliateId=${affiliateProductLink.userId}`);
+                alert("Affiliate link copied to clipboard!");
+
+            } else {
+                console.error('Error decoding affiliate link');
+            }
         }
     };
 
@@ -59,6 +68,14 @@ const AffiliateProduct = () => {
     }
 
     return (
+        <section className='w-full'>
+        <div className="flex justify-between w-full">
+          <h1 className='head_text text-left'>
+            <span className='blue_gradient'>Share your product</span>
+          </h1>
+        </div>
+        <p className='desc text-left'>Copy and share your affiliate link with your customers to make money</p>
+  
         <div className='mt-10 prompt_layout'>
             {products.map((product) => (
                 <ProductCard
@@ -72,6 +89,7 @@ const AffiliateProduct = () => {
                 />
             ))}
         </div>
+        </section>
     );
 };
 
