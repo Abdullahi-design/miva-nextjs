@@ -18,7 +18,7 @@ const Profile = ({ name, desc, data, handleAffiliate, handleEdit, handleDelete }
           {items.map((item, index) => (
             <Link href={item.href} key={index}>
               <button 
-              className={`w-fit px-4 py-2 text-lg border border-primary-orange rounded-md font-satoshi ${item.name == 'Sales' ? 'hover:bg-primary-orange bg-white hover:text-white text-gray-700' : 'bg-primary-orange hover:bg-white text-white hover:text-gray-700'}`}
+              className={`w-fit px-4 py-1 text-lg border border-primary-orange rounded-md font-satoshi ${item.name == 'Sales' ? 'hover:bg-primary-orange bg-white hover:text-white text-gray-700' : 'bg-primary-orange hover:bg-white text-white hover:text-gray-700'}`}
               >
                 {item.name}
               </button>

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 import Discover from "@components/Discover";
 
-const MyProfile = () => {
+const AffiliatedProducts = () => {
     const router = useRouter();
     const { data: session } = useSession();
     const [myProducts, setMyProducts] = useState([]);
@@ -35,4 +35,4 @@ const MyProfile = () => {
     );
 };
 
-export default MyProfile;
+export default AffiliatedProducts;

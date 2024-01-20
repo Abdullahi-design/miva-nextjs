@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { displayMedia } from "./displayMedia";
 
-const ProductCard = ({ product, handleAffiliate,generateAffiliateLink,Issubmitting, handleEdit, handleDelete, handleMetaDataClick }) => {
+const ProductCard = ({ product, handleAffiliate, generateAffiliateLink, Issubmitting, copyAffiliateLink, handleEdit, handleDelete, handleMetaDataClick }) => {
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
@@ -39,28 +39,28 @@ const ProductCard = ({ product, handleAffiliate,generateAffiliateLink,Issubmitti
     alert("Work in progress");
 
     try {
-    // const response = await fetch("/api/product/new", {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //   productName: product.productName,
-    //   description: product.description,
-    //   metaData: product.metaData,
-    //   price: product.price,
-    //   coverImage: product.coverImage,
-    //   thumbnail: product.thumbnail,
-    //   category: product.category,
-    //   cta: product.cta,
-    //   userId: session?.user.id,
-    //   }),
-    // });
+      // const response = await fetch("/api/product/new", {
+      //   method: "POST",
+      //   body: JSON.stringify({
+      //   productName: product.productName,
+      //   description: product.description,
+      //   metaData: product.metaData,
+      //   price: product.price,
+      //   coverImage: product.coverImage,
+      //   thumbnail: product.thumbnail,
+      //   category: product.category,
+      //   cta: product.cta,
+      //   userId: session?.user.id,
+      //   }),
+      // });
 
-    if (response.ok) {
-      router.push("/");
-    }
+      if (response.ok) {
+        router.push("/");
+      }
     } catch (error) {
-    console.log(error);
+      console.log(error);
     } finally {
-    setIsSubmitting(false);
+      setIsSubmitting(false);
     }
   };
 
@@ -97,7 +97,7 @@ const ProductCard = ({ product, handleAffiliate,generateAffiliateLink,Issubmitti
 
       <div className="cursor-pointer">
         <div onClick={handleProductDetailsClick} className="relative aspect-square mt-4 overflow-hidden rounded-lg">
-        {displayMedia(product)}
+          {displayMedia(product)}
         </div>
 
         <p className='my-4 font-satoshi text-sm text-gray-700'>{product.productName}</p>
@@ -107,9 +107,9 @@ const ProductCard = ({ product, handleAffiliate,generateAffiliateLink,Issubmitti
             onClick={() => handleMetaDataClick && handleMetaDataClick(product.metaData)}
           >
             {/* remove if metaData starts with "#" */}
-            #{product.metaData.replace(/^#/, '')} 
+            #{product.metaData.replace(/^#/, '')}
           </p>
-          {pathName !== "/profile" && (
+          {pathName !== "/profile" && pathName !== "/affiliated-products" && pathName !== "/affiliate" && (
             <span className="w-fit -mt-1.5">
               <button
                 type='submit'
@@ -121,6 +121,18 @@ const ProductCard = ({ product, handleAffiliate,generateAffiliateLink,Issubmitti
               </button>
             </span>
           )}
+          {pathName == "/affiliate" && (
+            <span className="w-fit -mt-1.5">
+              <button
+                type='submit'
+                disabled={submitting}
+                onClick={() => copyAffiliateLink()}
+                className='px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white whitespace-nowrap'
+              >
+                {submitting ? 'copied...' : 'Copy link'}
+              </button>
+            </span>
+          )}
           {pathName == "/affiliated-products" && (
             <span className="w-fit -mt-1.5">
               <button
@@ -129,7 +141,7 @@ const ProductCard = ({ product, handleAffiliate,generateAffiliateLink,Issubmitti
                 onClick={(e) => generateAffiliateLink(e, product)}
                 className='px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white whitespace-nowrap'
               >
-                {Issubmitting ? 'Generating...' :'Generate affiliate link'}
+                {Issubmitting ? 'Generating...' : 'Generate affiliate link'}
               </button>
             </span>
           )}

@@ -13,9 +13,10 @@ const AffiliateUserSchema = new Schema({
         type: String,
         required: [true, 'Product Id is required!'],
     },
-    affiliateLinks: [{
+    affiliateLink: {
         type: String,
-    }]
+        required: [true, 'affiliate link is required!'],
+    }
 });
 
 const AffiliateUser = models.AffiliateUser || model("AffiliateUser", AffiliateUserSchema);
