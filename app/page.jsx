@@ -11,7 +11,7 @@ const Home = () => {
             </span>
         </h1>
         <p className="desc text-center">
-            Hudsuller is the first B2C e-commerce platform that allows creators to sell products directly to their audience.
+            Hudsuller is the first African digital commerce platform that allows creators to sell products directly to their audience.
         </p>
 
         <Feed/>
