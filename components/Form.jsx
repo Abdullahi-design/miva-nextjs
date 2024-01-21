@@ -2,42 +2,55 @@ import Link from "next/link";
 import { useState } from "react";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { displayMedia } from "./displayMedia";
+import { formatFileSize } from "@utils/formatFormatSize";
 
 const Form = ({ type, desc, product, setProduct, submitting, handleSubmit }) => {
 
-  const [file, setFile] = useState(undefined)
+  const [file, setFile] = useState(undefined);
+  const [digitalProductfile, setdigitalProductfile] = useState(undefined);
   // const [fileUrl, setFileUrl] = useState(undefined)
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setFile(file)
-  
-    // if (fileUrl) {
-    //   URL.revokeObjectURL(fileUrl)
-    // }
-
     if (file) {
       // Read the selected image file and convert it to a data URL
       const reader = new FileReader();
       reader.onloadend = () => {
         setProduct({
           ...product,
-          coverImage: reader.result, // Set the data URL, not the entire file object
+          coverImage: reader.result,
           imagePreview: reader.result,
         });
       };
       reader.readAsDataURL(file);
-
-    //   const url = URL.createObjectURL(file);
-    //   setFileUrl(url);
-    //   setProduct({
-    //     ...product,
-    //     coverImage: url
-    //   });
-    // } else {
-    //   setFileUrl(undefined);
     }
   };  
+
+  const handleDigitalProductChange = (e) => {
+    const digitalProductfile = e.target.files[0];
+    setdigitalProductfile(digitalProductfile);
+
+    if (digitalProductfile) {
+      // Check if the file type is ZIP
+      if (!digitalProductfile.type.includes('zip')) {
+        alert('Please add your product in a ZIP file and upload.');
+        setdigitalProductfile(undefined);
+        return;
+      }
+
+      // Read the selected file and convert it to a data URL
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProduct({
+          ...product,
+          digitalProduct: reader.result,
+          digitalProductPreview: reader.result,
+        });
+      };
+      reader.readAsDataURL(digitalProductfile);
+    }
+  }; 
 
   return (
     <section className='w-full max-w-full flex-start flex-col'>
@@ -67,6 +80,7 @@ const Form = ({ type, desc, product, setProduct, submitting, handleSubmit }) => 
           />
         </label>
 
+        {/* cover image */}
         <label className="flex flex-col w-full items-center justify-center mx-auto border-2 border-gray-600 p-4">
           <span className='font-satoshi font-semibold text-base text-gray-700'>
             Cover Image {" "}
@@ -82,7 +96,7 @@ const Form = ({ type, desc, product, setProduct, submitting, handleSubmit }) => 
           <input
             onChange={(e) => handleImageChange(e)}
             type='file'
-            accept="image/jpeg, image/png, image/webp, image/gif, video/mp4, video/webm, application/pdf"
+            accept="image/jpeg, image/png, image/webp, image/gif, video/mp4, video/webm"
             required
             className='hidden'
             id='coverImageInput'
@@ -96,7 +110,7 @@ const Form = ({ type, desc, product, setProduct, submitting, handleSubmit }) => 
             </span>
             Upload Image
           </label>
-          {product.coverImage && file ? (
+          {product.coverImage && file && (
             <div className="flex gap-4 mt-2 items-center">
               {displayMedia(product)}
               <button
@@ -110,14 +124,42 @@ const Form = ({ type, desc, product, setProduct, submitting, handleSubmit }) => 
                 remove
               </button>
             </div>
-          ): product.coverImage && (
+          )}
+        </label>
+
+        {/* Actual product */}
+        <label className="flex flex-col w-full items-center justify-center mx-auto border-2 border-gray-600 p-4">
+          <span className='font-satoshi font-semibold text-base text-gray-700'>
+            Digital Product Upload {" "}
+          </span>
+          <input
+            onChange={(e) => handleDigitalProductChange(e)}
+            type='file'
+            accept="application/zip"
+            required
+            className='hidden'
+            id='productInput'
+          />
+          <label
+            htmlFor='productInput'
+            className='flex w-fit cursor-pointer bg-blue-500 text-white py-2 px-4 rounded-md transition duration-300 ease-in-out hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800'
+          >
+            <span className="">
+              <MdOutlineFileUpload className="w-6 h-6"/>
+            </span>
+            Upload Product
+          </label>
+          {product.digitalProduct && digitalProductfile && (
             <div className="flex gap-4 mt-2 items-center">
-              {displayMedia(product)}
+              <div>
+                <p><span className=" text-green-700">Product Name:</span> {digitalProductfile.name}</p>
+                <p><span className=" text-green-700">Size:</span> {formatFileSize(digitalProductfile.size)}</p>
+              </div>
               <button
                 type="button"
                 className="border rounded-xl px-4 py-2"
                 onClick={() => {
-                  setFile(undefined)
+                  setdigitalProductfile(undefined)
                   // setFileUrl(undefined)
                 }}
               >

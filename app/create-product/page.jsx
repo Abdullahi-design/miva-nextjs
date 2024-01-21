@@ -18,6 +18,7 @@ const CreateProduct = () => {
         price: "",
         coverImage: "",
         thumbnail: "testing",
+        digitalProduct:"",
         category: "",
         cta: "",
         commission: 0
@@ -37,6 +38,7 @@ const CreateProduct = () => {
             price: product.price,
             coverImage: product.coverImage,
             thumbnail: product.thumbnail,
+            digitalProduct: product.digitalProduct,
             category: product.category,
             cta: product.cta,
             commission: product.commission,
