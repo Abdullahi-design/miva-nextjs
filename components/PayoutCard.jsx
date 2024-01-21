@@ -13,7 +13,7 @@ const PayoutCard = ({ paymentMethod }) => {
         <FaStore className="w-5 h-5 mr-2 text-primary-orange" />
         <p className="font-bold font-satoshi text-lg">{paymentMethod.name}</p>
       </div>
-      <p className="text-gray-600">Get paid out to your Stripe account</p>
+      <p className="text-gray-600">Get paid out to your {paymentMethod.name} account</p>
       <p className="text-gray-600">Transaction Fee: {paymentMethod.transactionFee * 100} %</p>
       <button
         disabled={isMonniePoint}
