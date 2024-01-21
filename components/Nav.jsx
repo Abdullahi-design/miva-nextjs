@@ -45,6 +45,10 @@ const Nav = () => {
                 Create Product
               </Link>
 
+              <Link href='/payouts' className='payout_btn'>
+                Payouts
+              </Link>
+
               <button type='button' onClick={signOut} className='outline_btn'>
                 Sign Out
               </button>
@@ -105,7 +109,7 @@ const Nav = () => {
                     className='dropdown_link'
                     onClick={() => setToggleDropdown(false)}
                   >
-                    Affiliated-products
+                    Affiliated products
                   </Link>
                   <Link
                     href='/create-product'
@@ -113,6 +117,13 @@ const Nav = () => {
                     onClick={() => setToggleDropdown(false)}
                   >
                     Create Product
+                  </Link>
+                  <Link
+                    href='/payouts'
+                    className='dropdown_link'
+                    onClick={() => setToggleDropdown(false)}
+                  >
+                    Payouts
                   </Link>
                   <button
                     type='button'
