@@ -5,7 +5,7 @@ import React from 'react'
 const Footer = () => {
   return (
     <div className='flex w-full mt-16 gap-4 justify-center'>
-        <p>Powered by</p>
+        <p className='mt-2'>Powered by</p>
         <Link href='/' className='flex gap-2 flex-center'>
             <Image
             src='/assets/images/hudsuller_logo.png'

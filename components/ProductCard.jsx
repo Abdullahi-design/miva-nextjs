@@ -100,7 +100,7 @@ const ProductCard = ({ product, handleAffiliateClick, generateAffiliateLink, Iss
           {displayMedia(product)}
         </div>
 
-        <p className='my-4 font-satoshi text-sm text-gray-700'>{product.productName}</p>
+        <p onClick={handleProductDetailsClick} className='my-4 font-satoshi text-sm text-gray-700'>{product.productName}</p>
         <div className="flex justify-between w-full">
           <p
             className='font-inter text-sm blue_gradient cursor-pointer'
