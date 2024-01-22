@@ -1,26 +1,24 @@
 import mongoose from 'mongoose';
 
-let isConnected = false; // track the connection
-
 export const connectToDB = async () => {
-  mongoose.set('strictQuery', true);
-
-  if(isConnected) {
+  if (mongoose.connections[0].readyState) {
     console.log('MongoDB is already connected');
     return;
-  }
+  };
 
   try {
+    
     await mongoose.connect(process.env.MONGODB_URI, {
       dbName: "hudsuller",
       useNewUrlParser: true,
+      // useFindAndModify: false,
+      // useCreateIndex: true,
       useUnifiedTopology: true,
-    })
+    });
 
-    isConnected = true;
-
-    console.log('MongoDB connected')
+    console.log('MongoDB connected');
   } catch (error) {
-    console.log(error);
+    console.error("Error connecting to MongoDB:", error);
+    throw error;
   }
-}
+};
