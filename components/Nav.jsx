@@ -21,33 +21,47 @@ const Nav = () => {
 
   return (
     <nav className='flex-between w-full mb-16 pt-3'>
-      <Link href='/' className='flex gap-2 flex-center'>
-        <Image
-          src='/assets/images/hudsuller_logo.png'
-          alt='logo'
-          width={200}
-          height={200}
-          className='object-contain'
-        />
-        {/* <p className='logo_text'>Hudsuller</p> */}
-      </Link>
+      <div className="md:flex hidden ">
+        <Link href='/' className='gap-2 flex-center'>
+          <Image
+            src='/assets/images/hudsuller_logo.png'
+            alt='logo'
+            width={200}
+            height={200}
+            className='object-contain'
+          />
+          {/* <p className='logo_text'>Hudsuller</p> */}
+        </Link>
+      </div>
+      <div className="flex md:hidden ">
+        <Link href='/' className='gap-2 flex-center'>
+          <Image
+            src='/assets/icons/favicon.png'
+            alt='logo'
+            width={50}
+            height={50}
+            className='object-contain'
+          />
+          {/* <p className='logo_text'>Hudsuller</p> */}
+        </Link>
+      </div>
 
       <section className="flex">
         {/* Desktop Navigation */}
         <div className='sm:flex hidden'>
           {session?.user ? (
             <div className='flex gap-3 md:gap-5'>
-              <Link href='/affiliated-products' className='affiliate_btn'>
+              {/* <Link href='/affiliated-products' className='affiliate_btn'>
                 Affiliate products
-              </Link>
+              </Link> */}
 
-              <Link href='/create-product' className='black_btn'>
+              {/* <Link href='/create-product' className='black_btn'>
                 Create Product
-              </Link>
+              </Link> */}
 
-              <Link href='/payouts' className='payout_btn'>
+              {/* <Link href='/payouts' className='payout_btn'>
                 Payouts
-              </Link>
+              </Link> */}
 
               <button type='button' onClick={signOut} className='outline_btn'>
                 Sign Out
@@ -125,6 +139,7 @@ const Nav = () => {
                   >
                     Payouts
                   </Link>
+                  {session?.user && (<Cart/>)}
                   <button
                     type='button'
                     onClick={() => {

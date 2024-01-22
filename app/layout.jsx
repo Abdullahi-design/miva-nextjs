@@ -3,6 +3,7 @@ import '@styles/globals.css'
 import Nav from '@components/Nav';
 import Provider from '@components/Provider';
 import Footer from '@components/Footer';
+import Sidebar from '@components/Sidebar';
 
 export const metadata = {
     title: 'Hudsuller',
@@ -20,6 +21,7 @@ const RootLayout = ({ children }) => {
 
                 <main className='app relative flex flex-col min-h-screen'>
                     <Nav/>
+                    {/* <Sidebar/> */}
                     <div className='flex-grow flex-1'>{children}</div>
                     <Footer/>
                 </main>
