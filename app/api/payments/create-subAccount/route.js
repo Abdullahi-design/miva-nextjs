@@ -25,33 +25,6 @@ export const POST = async (request) => {
     } = await request.json();
 
     try {
-        await connectToDB();
-
-        // Check if user bank account exists
-        let userBankAccount = await UserBankAccount.findOne({ creator: userId });
-
-        if (userBankAccount) {
-            // If user bank account exists, update the details
-            userBankAccount.bankName = bankName;
-            userBankAccount.bankCode = bankCode;
-            userBankAccount.accountNumber = accountNumber;
-            userBankAccount.aliseName = aliseName;
-            userBankAccount.percentageCharges = percentageCharges;
-
-            await userBankAccount.save();
-        } else {
-            // If user bank account doesn't exist, create a new one
-            userBankAccount = new UserBankAccount({ 
-                creator: userId, 
-                bankName,
-                bankCode,
-                accountNumber,
-                aliseName,
-                percentageCharges,
-            });
-
-            await userBankAccount.save();
-        }
 
         // Create subaccount in Paystack
         const paystackData = {
@@ -71,6 +44,26 @@ export const POST = async (request) => {
         const paystackResult = await paystackResponse.json();
 
         if (paystackResult.status === true) {
+            await connectToDB();
+
+            // Check if user bank account exists
+            let userBankAccount = await UserBankAccount.findOne({ creator: userId });
+
+            if (userBankAccount) {
+                // If user bank account exists, update the details
+                userBankAccount.paystackResult = paystackResult;
+
+                await userBankAccount.save();
+            } else {
+                // If user bank account doesn't exist, create a new one
+                userBankAccount = new UserBankAccount({ 
+                    creator: userId, 
+                    paystackResult
+                });
+
+                await userBankAccount.save();
+            }
+            
             return new Response(JSON.stringify(userBankAccount), { status: 200 });
         } else {
             console.error(paystackResult.message);
