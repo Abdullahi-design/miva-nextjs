@@ -1,5 +1,5 @@
 "use client"
-import PayoutCard from '@components/PayoutCard';
+import DisplayBank from '@components/DisplayBank';
 import PayoutInput from '@components/PayoutInput'
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react'
@@ -49,7 +49,7 @@ const page = () => {
       if (session?.user.id) fetchbankList();
     }
   }, [session?.user.id, dataFetched, status]);
-  
+
   const createSubAccount =  async(e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -81,7 +81,7 @@ const page = () => {
     <section className='block'>
       <div className='md:flex block gap-3 md:space-y-0 space-y-3'>
         {status ? (
-          <PayoutCard 
+          <DisplayBank 
             key={dataFetched.id}
             dataFetched={dataFetched} 
           />
