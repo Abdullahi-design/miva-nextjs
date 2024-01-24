@@ -1,4 +1,5 @@
 "use client"
+import DisplayBank from '@components/DisplayBank';
 import PayoutInput from '@components/PayoutInput'
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react'
@@ -14,18 +15,40 @@ const page = () => {
     bankCode: "",
     percentageCharges: (0.12 * 100),
   });
+  const [dataFetched, setDataFetched] = useState();
+  const [status, setStatus] = useState(false);
 
   useEffect(() => {
-    const fetchbankList = async () => {
-      const response = await fetch(`/api/payments/listBanks`);
+    const fetchUserBankAccount = async () => {
+      const response = await fetch(`/api/payments/create-subAccount/${session?.user.id}`)
       const responseData = await response.json();
       
-      setBanks(responseData.data);
-      // console.log(listBanks, 'listBanks');
+      // setBanks(responseData.data);
+      setDataFetched(responseData.paystackResult.data);
+      setStatus(responseData.paystackResult?.data?.active);
+      // console.log(responseData, 'listBanks');
     };
     
-    if (session?.user.id) fetchbankList();
+    if (session?.user.id) fetchUserBankAccount();
   }, [session?.user.id]);
+
+  useEffect(() => {
+    if (!status && dataFetched) {
+      const fetchbankList = async () => {
+        try {
+          const response = await fetch(`/api/payments/listBanks`);
+          const responseData = await response.json();
+
+          setBanks(responseData.data);
+          // console.log(listBanks, 'listBanks');
+        } catch (error) {
+          console.error('Error fetching banks:', error);
+        }
+      };
+
+      if (session?.user.id) fetchbankList();
+    }
+  }, [session?.user.id, dataFetched, status]);
 
   const createSubAccount =  async(e) => {
     e.preventDefault();
@@ -54,29 +77,25 @@ const page = () => {
     }
   }
 
-      
-  // const paymentMethods = [
-  //   {id: 1, name: "Paystack", href: "https://dashboard.paystack.com/#/login?next=pages.one", transactionFee: 0.025},
-  //   {id: 2, name: "Monnie Point", href: "#", transactionFee: 0},
-  // ]
   return (
     <section className='block'>
       <div className='md:flex block gap-3 md:space-y-0 space-y-3'>
-        {/* {paymentMethods.map(paymentMethod =>
-          <PayoutCard 
-            key={paymentMethod.id}
-            paymentMethod={paymentMethod} 
+        {status ? (
+          <DisplayBank 
+            key={dataFetched.id}
+            dataFetched={dataFetched} 
           />
-        )} */}
-        <PayoutInput 
-        handleSubmit={createSubAccount} 
-        banks={banks}
-        submitting={submitting}
-        bankDetails={bankDetails}
-        setBankDetails={setBankDetails}
-        />
+        ):(
+          <PayoutInput 
+            handleSubmit={createSubAccount} 
+            banks={banks}
+            submitting={submitting}
+            bankDetails={bankDetails}
+            setBankDetails={setBankDetails}
+          />
+        )}
       </div>
-      <p className='text-center mt-10 font-extrabold text-lg'>All sales will incur a 10% Hudsuller fee + 2.5% Paystack fee.</p>
+      <p className='text-center mt-10 font-extrabold text-lg'>All sales will incur a 10% Hudsuller fee + 1.5% Paystack fee.</p>
     </section>
   )
 }

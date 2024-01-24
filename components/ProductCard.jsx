@@ -36,27 +36,28 @@ const ProductCard = ({ product, handleAffiliateClick, generateAffiliateLink, Iss
   const buyProduct = async (e) => {
     // e.preventDefault();
     setIsSubmitting(true);
-    alert("Work in progress");
+    // alert("Work in progress");
 
     try {
-      // const response = await fetch("/api/product/new", {
-      //   method: "POST",
-      //   body: JSON.stringify({
-      //   productName: product.productName,
-      //   description: product.description,
-      //   metaData: product.metaData,
-      //   price: product.price,
-      //   coverImage: product.coverImage,
-      //   thumbnail: product.thumbnail,
-      //   category: product.category,
-      //   cta: product.cta,
-      //   userId: session?.user.id,
-      //   }),
-      // });
+      const response = await fetch('/api/payments/create-payment', {
+        method: 'POST',
+        body: JSON.stringify({
+          productName: product.productName,
+          description: product.description,
+          price: product.price,
+        })
+      });
 
       if (response.ok) {
-        router.push("/");
+        const data = await response.json();
+        setPaymentData(data);
+      } else {
+        console.error('Failed to create payment:', response.statusText);
       }
+
+      // if (response.ok) {
+      //   router.push("/");
+      // }
     } catch (error) {
       console.log(error);
     } finally {

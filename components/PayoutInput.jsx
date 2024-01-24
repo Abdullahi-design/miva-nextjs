@@ -1,9 +1,23 @@
+"use client";
+import { useState } from "react";
+import ConfirmationModal from "./modal/ConfirmationModal";
 
 const PayoutInput = ({ handleSubmit, banks, submitting, bankDetails, setBankDetails }) => {
+    const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false);
+
+    const handleConfirmSubmit = (e) => {
+        e.preventDefault();
+        setConfirmationModalOpen(false);
+        handleSubmit(e);
+    };
+
   return (
     <div>        
         <form 
-        onSubmit={handleSubmit}
+        onSubmit={(e) => {
+            e.preventDefault();
+            setConfirmationModalOpen(true);
+        }}
         className=' w-full max-w-2xl flex flex-col gap-7 glassmorphism'
         >
             <label className='flex flex-col items-start mt-4'>
@@ -63,6 +77,12 @@ const PayoutInput = ({ handleSubmit, banks, submitting, bankDetails, setBankDeta
                 {submitting ? `Adding...` : 'Add Bank Account'}
             </button>
         </form>
+        <ConfirmationModal
+            isOpen={isConfirmationModalOpen}
+            onClose={() => setConfirmationModalOpen(false)}
+            onConfirm={handleConfirmSubmit}
+            formData={bankDetails}
+        />
     </div>
   )
 }
