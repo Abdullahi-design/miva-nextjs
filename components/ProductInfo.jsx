@@ -12,42 +12,6 @@ const ProductInfo = ({ product }) => {
   const searchParams = useSearchParams();
   const [submitting, setIsSubmitting] = useState(false);
 
-  const buyProduct = async () => {
-    // e.preventDefault();
-    setIsSubmitting(true);
-    
-    try {
-      
-      const affiliateId = searchParams.get("affiliateId");
-      
-      console.log("Affiliate ID:", affiliateId);
-      alert("Work in progress");
-
-      // const response = await fetch("/api/product/new", {
-      //   method: "POST",
-      //   body: JSON.stringify({
-      //   productName: product.productName,
-      //   description: product.description,
-      //   metaData: product.metaData,
-      //   price: product.price,
-      //   coverImage: product.coverImage,
-      //   thumbnail: product.thumbnail,
-      //   category: product.category,
-      //   cta: product.cta,
-      //   userId: session?.user.id,
-      //   }),
-      // });
-
-      // if (response.ok) {
-      //   router.push("/");
-      // }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   return (
     <div className='product-card-info flex flex-col lg:flex-row lg:gap-8 border border-gray-300 rounded-lg overflow-hidden'>
 
@@ -83,7 +47,6 @@ const ProductInfo = ({ product }) => {
           <div className='flex justify-between gap-3'>
             <Button 
               product={product} 
-              buyProduct ={buyProduct}
             >
               {product.cta}
             </Button>
