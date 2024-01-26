@@ -67,7 +67,7 @@ const Nav = () => {
                 Sign Out
               </button>
 
-              <Link href='/profile'>
+              {/* <Link href='/profile'>
                 <Image
                   src={session?.user.image}
                   width={37}
@@ -75,7 +75,7 @@ const Nav = () => {
                   className='rounded-full'
                   alt='profile'
                 />
-              </Link>
+              </Link> */}
             </div>
           ) : (
             <>
@@ -100,24 +100,24 @@ const Nav = () => {
         <div className='sm:hidden flex relative'>
           {session?.user ? (
             <div className='flex'>
-              <Image
+              {/* <Image
                 src={session?.user.image}
                 width={37}
                 height={37}
                 className='rounded-full'
                 alt='profile'
                 onClick={() => setToggleDropdown(!toggleDropdown)}
-              />
+              /> */}
 
               {toggleDropdown && (
                 <div className='dropdown z-30'>
-                  <Link
+                  {/* <Link
                     href='/profile'
                     className='dropdown_link'
                     onClick={() => setToggleDropdown(false)}
                   >
                     My Profile
-                  </Link>
+                  </Link> */}
                   <Link
                     href='/affiliated-products'
                     className='dropdown_link'
@@ -139,7 +139,7 @@ const Nav = () => {
                   >
                     Payouts
                   </Link>
-                  {session?.user && (<Cart/>)}
+                  {/* {session?.user && (<Cart/>)} */}
                   <button
                     type='button'
                     onClick={() => {
