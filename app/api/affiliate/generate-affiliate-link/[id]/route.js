@@ -1,7 +1,7 @@
 
 import AffiliateUser from "@models/userAffiliateProduct";
 import { connectToDB } from "@utils/database";
-import generateAffiliateLink from "@utils/generateAffiliateLink";
+import { generateAffiliateLink } from "@utils/generateAffiliateLink";
 import mongoose from 'mongoose';
 
 export const GET = async (request, { params }) => {
