@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { displayMedia } from "./displayMedia";
+import Button from "./ui/button";
 
 const ProductCard = ({ product, handleAffiliateClick, generateAffiliateLink, Issubmitting, copyAffiliateLink, handleEdit, handleDelete, handleMetaDataClick }) => {
   const { data: session } = useSession();
@@ -31,38 +32,6 @@ const ProductCard = ({ product, handleAffiliateClick, generateAffiliateLink, Iss
     setCopied(product.productName);
     navigator.clipboard.writeText(product.productName);
     setTimeout(() => setCopied(false), 3000);
-  };
-
-  const buyProduct = async (e) => {
-    // e.preventDefault();
-    setIsSubmitting(true);
-    // alert("Work in progress");
-
-    try {
-      const response = await fetch('/api/payments/create-payment', {
-        method: 'POST',
-        body: JSON.stringify({
-          productName: product.productName,
-          description: product.description,
-          price: product.price,
-        })
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setPaymentData(data);
-      } else {
-        console.error('Failed to create payment:', response.statusText);
-      }
-
-      // if (response.ok) {
-      //   router.push("/");
-      // }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsSubmitting(false);
-    }
   };
 
   return (
@@ -112,14 +81,11 @@ const ProductCard = ({ product, handleAffiliateClick, generateAffiliateLink, Iss
           </p>
           {pathName !== "/profile" && pathName !== "/affiliated-products" && pathName !== "/affiliate" && (
             <span className="w-fit -mt-1.5">
-              <button
-                type='submit'
-                disabled={submitting}
-                onClick={() => buyProduct()}
-                className='px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white whitespace-nowrap'
+              <Button 
+                product={product} 
               >
                 {product.cta}
-              </button>
+              </Button>
             </span>
           )}
           {pathName == "/affiliate" && (

@@ -1,8 +1,11 @@
 import { useState } from "react";
 import ProductCard from "./ProductCard";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const Discover = ({ name, desc, product }) => {
+
+  const router = useRouter()
 
     const [Issubmitting, setIsSubmitting] = useState(false);
     const { data: session } = useSession();
@@ -42,10 +45,10 @@ const Discover = ({ name, desc, product }) => {
               console.error("Failed to update product:", response.statusText);
           }
   
-        //   if (response.ok) {
-        //       // Call the onRedirect callback passed from the parent component
-        //       router.push('/');
-        //     }
+          if (response.ok) {
+              // Call the onRedirect callback passed from the parent component
+              router.push('/affiliate');
+            }
         } catch (error) {
           console.error(error);
         } finally {
