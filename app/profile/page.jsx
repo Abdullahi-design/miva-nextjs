@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 import Profile from "@components/Profile";
 import AffiliateForm from "@components/modal/AffiliateForm";
-import Loader from "@components/Loader";
+import ProductCardSkeleton from "@components/skeletonLoader/ProductCardSkeleton";
 
 const MyProfile = () => {
   const router = useRouter();
@@ -82,7 +82,9 @@ const MyProfile = () => {
             /* other necessary props for AffiliateForm */
           />
         ))
-      ): <Loader/>}
+      ):( 
+        myProducts.length === 0 ? <ProductCardSkeleton /> : null
+    )}
     </>
   );
 };
