@@ -2,10 +2,12 @@
 import DisplayBank from '@components/DisplayBank';
 import PayoutInput from '@components/PayoutInput'
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
 const page = () => {
   const { data: session } = useSession();
+  const router = useRouter();
   const [banks, setBanks] = useState([]);
   const [submitting, setIsSubmitting] = useState(false);
   const [bankDetails, setBankDetails] = useState({ 
@@ -24,16 +26,18 @@ const page = () => {
       const responseData = await response.json();
       
       // setBanks(responseData.data);
-      setDataFetched(responseData.paystackResult.data);
-      setStatus(responseData.paystackResult?.data?.active);
-      // console.log(responseData, 'listBanks');
+      setDataFetched(responseData?.paystackResult?.data);
+      setStatus(responseData?.paystackResult?.data?.active);
+      console.log(responseData, 'listBanks');
     };
     
     if (session?.user.id) fetchUserBankAccount();
   }, [session?.user.id]);
 
+  // console.log({status, dataFetched});
+
   useEffect(() => {
-    if (!status && dataFetched) {
+    if (!status) {
       const fetchbankList = async () => {
         try {
           const response = await fetch(`/api/payments/listBanks`);
@@ -67,9 +71,9 @@ const page = () => {
         }),
       });
 
-      // if (response.ok) {
-      //   router.push("/");
-      // }
+      if (response.ok) {
+        router.push('/');
+      }
     } catch (error) {
       console.log(error);
     } finally {
