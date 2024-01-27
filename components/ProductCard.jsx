@@ -113,8 +113,14 @@ const ProductCard = ({ product, handleAffiliateClick, generateAffiliateLink, Iss
             </span>
           )}
         </div>
+        {(pathName === "/affiliate" || pathName === "/affiliated-products" ) && (
+          <div className="flex justify-start text-green-700 font-bold">
+            <h2>Commission: {" "}</h2>
+            <p>{product.commission}%</p>
+          </div>
+        )}
 
-        {session?.user.id === product.creator._id && pathName === "/profile" && (
+        {(session?.user.id === product.creator._id && pathName === "/profile") && (
           <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>
             <p
               className='font-inter text-sm green_gradient cursor-pointer'
