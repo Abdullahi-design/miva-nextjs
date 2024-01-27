@@ -105,7 +105,7 @@ const ProductCard = ({ product, handleAffiliateClick, generateAffiliateLink, Iss
               <button
                 type='submit'
                 disabled={Issubmitting}
-                onClick={(e) => generateAffiliateLink(e, product)}
+                onClick={(e) => generateAffiliateLink(e)}
                 className='px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white whitespace-nowrap'
               >
                 {Issubmitting ? 'Generating...' : 'Generate affiliate link'}
@@ -115,7 +115,7 @@ const ProductCard = ({ product, handleAffiliateClick, generateAffiliateLink, Iss
         </div>
         {(pathName === "/affiliate" || pathName === "/affiliated-products" ) && (
           <div className="flex justify-start text-green-700 font-bold">
-            <h2>Commission: {" "}</h2>
+            <h2>Commission: </h2>
             <p>{product.commission}%</p>
           </div>
         )}
