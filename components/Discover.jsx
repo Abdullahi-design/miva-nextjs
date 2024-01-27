@@ -9,15 +9,14 @@ const Discover = ({ name, desc, product }) => {
 
     const [Issubmitting, setIsSubmitting] = useState(false);
     const { data: session } = useSession();
+    const [affiliateProduct, setAffiliateProduct] = useState()
 
 
-    const generateAffiliateLink = async (e, product) => {
+    const generateAffiliateLink = async (e, clickedProduct) => {
         e.preventDefault();
         setIsSubmitting(true);
-
-        // console.log(clickedProduct, 'here');
   
-            if (!product._id) {
+            if (!clickedProduct._id) {
                 return alert("Missing ProductId!")
             }
 
@@ -30,11 +29,13 @@ const Discover = ({ name, desc, product }) => {
             const userId = session.user.id;
     
         try {
-          const response = await fetch(`/api/affiliate/generate-affiliate-link/${product._id}`, {
+          setAffiliateProduct(clickedProduct)
+          console.log(affiliateProduct);
+          const response = await fetch(`/api/affiliate/generate-affiliate-link/${clickedProduct._id}`, {
             method: "POST",
             body: JSON.stringify({
                 userId: userId,
-                commission: product.commission,
+                commission: clickedProduct.commission,
             })
           });
           
@@ -42,7 +43,7 @@ const Discover = ({ name, desc, product }) => {
           if (response.ok) {
               console.log("Product updated successfully!");
           } else {
-              console.error("Failed to update product:", response.statusText);
+              console.error("Failed to update clickedProduct:", response.statusText);
           }
   
           if (response.ok) {
@@ -70,7 +71,7 @@ const Discover = ({ name, desc, product }) => {
           <ProductCard
             key={product._id}
             product={product}
-            generateAffiliateLink={generateAffiliateLink}
+            generateAffiliateLink={(e) => generateAffiliateLink(e, product)}
             Issubmitting={Issubmitting}
           />
         ))}
