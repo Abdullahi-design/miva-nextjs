@@ -17,7 +17,7 @@ const Profile = ({ name, desc, data, handleAffiliateClick, handleEdit, handleDel
           <ProductCard
             key={product._id}
             product={product}
-            handleAffiliateClick={() => handleAffiliateClick && handleAffiliateClick(product)}
+            handleAffiliateClick={() => handleAffiliateClick(product)}
             handleEdit={() => handleEdit && handleEdit(product)}
             handleDelete={() => handleDelete && handleDelete(product)}
           />

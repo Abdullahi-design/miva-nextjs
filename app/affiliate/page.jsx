@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import ProductCard from "@components/ProductCard";
 import { extractUserInfoFromAffiliateLink } from "@utils/generateAffiliateLink";
-import Loader from "@components/Loader";
+import ProductCardSkeleton from "@components/skeletonLoader/ProductCardSkeleton";
 
 const AffiliateProduct = () => {
     const searchParams = useSearchParams();
@@ -65,7 +65,7 @@ const AffiliateProduct = () => {
     };
 
     if (!products) {
-        return <Loader/>; // Add a loading state
+        return <ProductCardSkeleton/>; // Add a loading state
     }
 
     return (

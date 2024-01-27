@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 import Profile from "@components/Profile";
 import AffiliateForm from "@components/modal/AffiliateForm";
-import Loader from "@components/Loader";
+import ProductCardSkeleton from "@components/skeletonLoader/ProductCardSkeleton";
 
 const MyProfile = () => {
   const router = useRouter();
@@ -14,10 +14,12 @@ const MyProfile = () => {
   
 
   const [myProducts, setMyProducts] = useState([]);
+  const [products, setproducts] = useState([]);
   const [showAffiliateModal, setShowAffiliateModal] = useState(false);
 
-  const handleAffiliateClick = () => {
+  const handleAffiliateClick = (product) => {
     // handleAffiliate()
+    setproducts(product)
     setShowAffiliateModal(true);
   };
 
@@ -71,18 +73,20 @@ const MyProfile = () => {
         handleDelete={handleDelete}
       />
       {showAffiliateModal ? (
-        myProducts.map(product => (
+        // myProducts.map(product => (
           <AffiliateForm
-          key={product._id}
-            product={product}
+          // key={product._id}
+            product={products}
             setShowAffiliateModal={setShowAffiliateModal}
             type="commisson"
             desc=""
             onClose={() => setShowAffiliateModal(false)}
             /* other necessary props for AffiliateForm */
           />
-        ))
-      ): <Loader/>}
+        // ))
+      ):( 
+        myProducts.length === 0 ? <ProductCardSkeleton /> : null
+    )}
     </>
   );
 };

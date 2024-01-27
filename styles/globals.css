@@ -178,6 +178,58 @@
   @apply flex justify-between items-center;
 }
 
+/* Skeleton Loader Styles */
+.prompt_card.skeleton {
+  @apply flex-1 break-inside-avoid rounded-lg border border-gray-300 bg-white/20 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter md:w-[360px] w-full h-fit;
+}
+
+.skeleton {
+  background: #b3b2b2; /* Adjust the background color */
+  animation: skeleton-loading 1.5s infinite alternate;
+}
+
+.skeleton-loading {
+  opacity: 0.8;
+}
+
+.skeleton-avatar {
+  @apply w-8 h-8 rounded-full skeleton;
+}
+
+.skeleton-text {
+  @apply h-4 w-20 skeleton;
+}
+
+.skeleton-icon {
+  @apply w-4 h-4 skeleton;
+}
+
+.skeleton-media {
+  @apply w-full h-48 skeleton;
+}
+
+.skeleton-meta {
+  @apply h-4 w-20 skeleton;
+}
+
+.skeleton-button {
+  @apply h-8 w-32 skeleton;
+}
+
+.skeleton-action {
+  @apply h-4 w-16 skeleton;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
 /* ProductInfo Component */
 .product-card-info {
   @apply flex-1 break-inside-avoid rounded-lg border border-gray-300 bg-white/20 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter w-full h-fit overflow-hidden;
