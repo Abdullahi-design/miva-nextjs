@@ -1,37 +1,89 @@
-import React from 'react'
+"use client";
+
+import { useSession } from 'next-auth/react';
+import { useSearchParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react'
 
 const Button = ({ product }) => {
+  const { data: session } = useSession()
+  const searchParams = useSearchParams();
+  const productId = searchParams.get("affiliateId");
+  const [affiliateUserAccount, setAffiliateUserAccount] = useState()
+  const [sellerUserAccount, setSellerUserAccount] = useState();
 
+  const affiliateUserId = productId;
+  const sellerUserId = session?.user.id;
+
+  console.log(affiliateUserId);
+
+  useEffect(() => {
+    const fetchBankDetails = async (userId, setAccountCallback) => {
+      const response = await fetch(`/api/payments/create-subAccount/${userId}`);
+      const data = await response.json();
+
+      setAccountCallback(data.paystackResult.data.subaccount_code);
+      console.log(data, 'the data');
+    };
+
+    if (affiliateUserId) {
+      fetchBankDetails(affiliateUserId, setAffiliateUserAccount);
+    }
+
+    if (sellerUserId) {
+      fetchBankDetails(sellerUserId, setSellerUserAccount);
+    }
+  }, [affiliateUserId, sellerUserId]);
+  
   const buyProduct = async (e) => {
     e.preventDefault();
     // setIsSubmitting(true);
-    alert("Work in progress");
+    // alert("Work in progress");
+    
+    try {
+      const affiliateCommission = product.commission;
 
-    // try {
-    //   const response = await fetch('/api/payments/create-payment', {
-    //     method: 'POST',
-    //     body: JSON.stringify({
-    //       productName: product.productName,
-    //       description: product.description,
-    //       price: product.price,
-    //     })
-    //   });
+      // Calculate the seller's commission to ensure the total is 100%
+      const sellerCommission = (100 - affiliateCommission).toFixed(2);
 
-    //   if (response.ok) {
-    //     const data = await response.json();
-    //     setPaymentData(data);
-    //   } else {
-    //     console.error('Failed to create payment:', response.statusText);
-    //   }
+      console.log(product, 'product');
+      const response = await fetch('/api/payments/create-split', {
+        method: 'POST',
+        body: JSON.stringify({
+          name:`${product.productName} affiliate Percentage Split`, 
+          type:"percentage",
+          currency: "NGN", 
+          subaccounts:[{
+            subaccount: affiliateUserAccount,
+            share: parseFloat(affiliateCommission),
+          },
+          {
+            subaccount: sellerUserAccount,
+            share: parseFloat(sellerCommission),
+          }],
+          affiliateUserId,
+          sellerUserId
+        })
+      });
 
-    //   // if (response.ok) {
-    //   //   router.push("/");
-    //   // }
-    // } catch (error) {
-    //   console.log(error);
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
+      if (response.ok) {
+        const data = await response.json();
+        // setPaymentData(data);
+        console.log(data);
+      } else {
+        console.error('Failed to create payment:', response.statusText);
+      }
+
+      // if (response.ok) {
+      //   router.push("/");
+      // }
+      console.log(productId, 'productId');
+    } catch (error) {
+      console.log(error);
+    } finally {
+      // setIsSubmitting(false);
+    }
+
+
   };
 
   return (
