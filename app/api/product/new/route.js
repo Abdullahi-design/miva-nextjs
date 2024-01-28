@@ -33,9 +33,9 @@ export const POST = async (request) => {
         const paystackData = {
             name: productName,
             description,
+            redirect_url: `http://localhost:3000/thankYou`,
             amount: price * 100, // Convert to kobo (NGN 100 = 10000 kobo)
         };
-        console.log(paystackData);
         
         const paystackResponse = await fetch(`https://${options.hostname}${options.path}`, {
             ...options,
