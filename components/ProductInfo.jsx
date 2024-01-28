@@ -1,15 +1,9 @@
-"use client";
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React from 'react';
 import AddToCartButton from './AddToCart';
 import Button from './ui/button';
 import { displayMedia } from './displayMedia';
-import { useRouter, useSearchParams } from 'next/navigation';
-
 const ProductInfo = ({ product }) => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [submitting, setIsSubmitting] = useState(false);
 
   return (
     <div className='product-card-info flex flex-col lg:flex-row lg:gap-8 border border-gray-300 rounded-lg overflow-hidden'>

@@ -35,7 +35,7 @@ const CreateProduct = () => {
             productName: product.productName,
             description: product.description,
             metaData: product.metaData,
-            price: product.price,
+            price: parseFloat(product.price),
             coverImage: product.coverImage,
             thumbnail: product.thumbnail,
             digitalProduct: product.digitalProduct,
