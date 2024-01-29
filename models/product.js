@@ -7,11 +7,11 @@ const ProductSchema = new Schema({
     },
     paystackProductId: {
         type: Number,
-        required: [true, 'paystack product Id is required']
+        // required: [true, 'paystack product Id is required']
     },
     paystackProductUrl: {
         type: String,
-        required: [true, 'paystack product slug is required']
+        // required: [true, 'paystack product slug is required']
     },
     productName: {
         type: String,
@@ -36,6 +36,10 @@ const ProductSchema = new Schema({
     thumbnail: {
         type: String,
         required: [true, 'Thumbnail is required.'],
+    },
+    digitalProduct: {
+        type: String,
+        required: [true, 'Digital Product is required.'],
     },
     category: {
         type: String,
