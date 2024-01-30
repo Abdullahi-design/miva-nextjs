@@ -1,14 +1,15 @@
 "use client";
 
 import Loader from '@components/Loader';
-// import { sendProductToEmail } from '@utils/emailDownload';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import JSZip from 'jszip';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
+import { handleDownload } from '@utils/downloadProduct';
+import { sendProductToEmail } from '@app/api/notification/sendProductToEmail';
 
 const page = () => {
+  const {data: session} = useSession();
   const searchParams = useSearchParams();
   const productReference = searchParams.get("reference");
   const productId = searchParams.get("productId");
@@ -20,39 +21,12 @@ const page = () => {
         const data = await response.json();
 
         setProduct(data);
+        // sendProductToEmail(session, data)
         console.log(data, 'data');
     };
 
     if (productId) fetchProducts();
-  }, [productId]);
-
-  const handleDownload = async () => {
-    if (product && product.digitalProduct) {
-      const zip = new JSZip();
-      const imgBlob = await fetch(product.digitalProduct).then((res) => res.blob());
-
-      // Add the image blob to the zip file
-      zip.file('digital_product.zip', imgBlob);
-
-      // Generate the zip file
-      const zipBlob = await zip.generateAsync({ type: 'blob' });
-
-      // Create a link element
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(zipBlob);
-      link.download = 'digital_product.zip';
-
-      // Append the link to the body
-      document.body.appendChild(link);
-
-      // Trigger a click on the link to start the download
-      link.click();
-
-      // Remove the link from the body
-      document.body.removeChild(link);
-    }
-  };
-  
+  }, [productId]); 
   
   return (
     <div className='text-center my-5'>
@@ -71,7 +45,7 @@ const page = () => {
         <div className="text-center">
           <h2 className="text-2xl font-bold">{product.productName}</h2>
           <button
-            onClick={handleDownload}
+            onClick={() => handleDownload(product)}
             className='w-fit px-6 py-3 md:text-xl text-md bg-primary-orange hover:bg-white hover:text-gray-700 border border-primary-orange rounded-md font-satoshi text-white transition-all duration-300'
           >
             Download Product
