@@ -5,14 +5,6 @@ const ProductSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
     },
-    paystackProductId: {
-        type: Number,
-        // required: [true, 'paystack product Id is required']
-    },
-    paystackProductUrl: {
-        type: String,
-        // required: [true, 'paystack product slug is required']
-    },
     productName: {
         type: String,
         required: [true, 'Product name is required.'],
