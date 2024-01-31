@@ -79,7 +79,7 @@ const ProductCard = ({ product, handleAffiliateClick, generateAffiliateLink, Iss
             {/* remove if metaData starts with "#" */}
             #{product.metaData.replace(/^#/, '')}
           </p>
-          {pathName !== "/profile" && pathName !== "/affiliated-products" && pathName !== "/affiliate" && (
+          {pathName !== "/profile" && pathName !== "/discover" && pathName !== "/affiliate" && (
             <span className="w-fit -mt-1.5">
               <Button 
                 product={product} 
@@ -100,7 +100,7 @@ const ProductCard = ({ product, handleAffiliateClick, generateAffiliateLink, Iss
               </button>
             </span>
           )}
-          {pathName == "/affiliated-products" && (
+          {pathName == "/discover" && (
             <span className="w-fit -mt-1.5">
               <button
                 type='submit'
@@ -113,7 +113,7 @@ const ProductCard = ({ product, handleAffiliateClick, generateAffiliateLink, Iss
             </span>
           )}
         </div>
-        {(pathName === "/affiliate" || pathName === "/affiliated-products" ) && (
+        {(pathName === "/affiliate" || pathName === "/discover" ) && (
           <div className="flex justify-start text-green-700 font-bold">
             <h2>Commission: </h2>
             <p>{product.commission}%</p>

@@ -6,7 +6,10 @@ export const GET = async (request, { params }) => {
         await connectToDB()
         
         const product = await Product.findById(params.id)
-        if (!product) return new Response("Products Not Found", { status: 404 });
+        // if (!product) return new Response("Products Not Found", { status: 404 });
+        if (!product) {
+            return new Response(JSON.stringify({ error: "Product not found" }), { status: 404, headers: { "Content-Type": "application/json" } });
+        }
 
         return new Response(JSON.stringify(product), { status: 200 })
 
