@@ -51,7 +51,7 @@ const Nav = () => {
         <div className='sm:flex hidden'>
           {session?.user ? (
             <div className='flex gap-3 md:gap-5'>
-              {/* <Link href='/affiliated-products' className='affiliate_btn'>
+              {/* <Link href='/discover' className='affiliate_btn'>
                 Affiliate products
               </Link> */}
 
@@ -119,7 +119,7 @@ const Nav = () => {
                     My Profile
                   </Link> */}
                   <Link
-                    href='/affiliated-products'
+                    href='/discover'
                     className='dropdown_link'
                     onClick={() => setToggleDropdown(false)}
                   >
@@ -171,7 +171,9 @@ const Nav = () => {
             </>
           )}
         </div>
-        {session?.user && (<Cart/>)}
+        <div className='hidden sm:flex'>
+          {session?.user && (<Cart/>)}
+        </div>
       </section>
     </nav>
   );

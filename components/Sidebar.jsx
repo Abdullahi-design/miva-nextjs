@@ -7,6 +7,7 @@ import { FaGift } from "react-icons/fa";
 
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+import { IoIosSearch } from 'react-icons/io';
 
 const Sidebar = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -17,11 +18,12 @@ const Sidebar = () => {
   };
 
   const menuItems = [
-    { title: 'Home', icon: <FiHome />, href: '/' },
+    { title: 'Home', icon: <FiHome />, href: '/profile' },
     // { title: 'Product', icon: <FiBox />, href: '/product' },
     { title: 'Create Product', icon: <FiBox />, href: '/create-product' },
     { title: 'Affiliate', icon: <FiUsers />, href: '/affiliate' },
-    { title: 'Affiliated products', icon: <FaGift />, href: '/affiliated-products' },
+    // { title: 'Affiliated products', icon: <FaGift />, href: '/discover' },
+    { title: 'Discover', icon: <IoIosSearch />, href: '/discover' },
     { title: 'Payouts', icon: <TbCurrencyNaira  className='bg-white text-gray-800 rounded-full' />, href: '/payouts' },
     { title: 'Cart', icon: <FiShoppingCart />, href: '/payouts' },
     // { title: 'Sales', icon: <FiShoppingCart />, href: '/sales' },
