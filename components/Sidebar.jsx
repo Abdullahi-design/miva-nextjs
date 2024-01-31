@@ -18,14 +18,14 @@ const Sidebar = () => {
   };
 
   const menuItems = [
-    { title: 'Home', icon: <FiHome />, href: '/profile' },
+    { title: 'Home', icon: <FiHome />, href: '/' },
     // { title: 'Product', icon: <FiBox />, href: '/product' },
     { title: 'Create Product', icon: <FiBox />, href: '/create-product' },
     { title: 'Affiliate', icon: <FiUsers />, href: '/affiliate' },
     // { title: 'Affiliated products', icon: <FaGift />, href: '/discover' },
     { title: 'Discover', icon: <IoIosSearch />, href: '/discover' },
     { title: 'Payouts', icon: <TbCurrencyNaira  className='bg-white text-gray-800 rounded-full' />, href: '/payouts' },
-    { title: 'Cart', icon: <FiShoppingCart />, href: '/payouts' },
+    { title: 'Cart', icon: <FiShoppingCart />, href: '/cart' },
     // { title: 'Sales', icon: <FiShoppingCart />, href: '/sales' },
     // { title: 'Analytics', icon: <FiBarChart2 />, href: '/analytics' },
     // { title: 'Email', icon: <FiMail />, href: '/email' },
