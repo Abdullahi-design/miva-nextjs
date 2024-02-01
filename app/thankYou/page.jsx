@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import { handleDownload } from '@utils/downloadProduct';
-import { sendProductToEmail } from '@app/api/notification/sendProductToEmail';
+// import { sendProductToEmail } from '@app/api/notification/sendProductToEmail';
 
 const page = () => {
   const searchParams = useSearchParams();
