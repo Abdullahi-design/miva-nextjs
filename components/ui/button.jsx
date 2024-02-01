@@ -53,6 +53,9 @@ const Button = ({ product }) => {
       // Handle the error as needed
     }
   };
+
+  // const affiliateUserId = productId;
+  // const sellerUserId = session?.user.id;
   
   return (
     <button  

@@ -15,10 +15,11 @@ const page = () => {
     accountNumber: "",
     aliseName: "",
     bankCode: "",
-    percentageCharges: (0.12 * 100),
+    percentageCharges: (0.10 * 100),
   });
   const [dataFetched, setDataFetched] = useState();
   const [status, setStatus] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
 
   useEffect(() => {
     const fetchUserBankAccount = async () => {
@@ -27,7 +28,7 @@ const page = () => {
       
       // setBanks(responseData.data);
       setDataFetched(responseData?.paystackResult?.data);
-      setStatus(responseData?.paystackResult?.data?.active);
+      setStatus(responseData?.paystackResult?.data);
       console.log(responseData, 'listBanks');
     };
     
@@ -70,6 +71,8 @@ const page = () => {
           userId: session?.user.id,
         }),
       });
+      const verifyBankDetails = await response.json();
+      const errorMsg = setErrorMessage(verifyBankDetails.error)
 
       if (response.ok) {
         router.push('/');
@@ -80,6 +83,8 @@ const page = () => {
       setIsSubmitting(false);
     }
   }
+
+  // console.log(errorMessage, 'errorMessage');
 
   return (
     <section className='block'>
@@ -93,13 +98,14 @@ const page = () => {
           <PayoutInput 
             handleSubmit={createSubAccount} 
             banks={banks}
+            errorMessage={errorMessage}
             submitting={submitting}
             bankDetails={bankDetails}
             setBankDetails={setBankDetails}
           />
         )}
       </div>
-      <p className='text-center mt-10 font-extrabold text-lg'>All sales will incur a 10% Hudsuller fee + 1.5% Paystack fee.</p>
+      <p className='text-center mt-10 font-extrabold text-lg'>All sales will incur a 10% Hudsuller fee</p>
     </section>
   )
 }

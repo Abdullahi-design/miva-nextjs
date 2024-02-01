@@ -58,6 +58,7 @@ export const POST = async (request) => {
                 // If user bank account doesn't exist, create a new one
                 userBankAccount = new UserBankAccount({ 
                     creator: userId, 
+                    paystackData,
                     paystackResult
                 });
 

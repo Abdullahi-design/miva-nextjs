@@ -2,7 +2,7 @@
 import { useState } from "react";
 import ConfirmationModal from "./modal/ConfirmationModal";
 
-const PayoutInput = ({ handleSubmit, banks, submitting, bankDetails, setBankDetails }) => {
+const PayoutInput = ({ handleSubmit, errorMessage, banks, submitting, bankDetails, setBankDetails }) => {
     const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false);
 
     const handleConfirmSubmit = (e) => {
@@ -55,6 +55,7 @@ const PayoutInput = ({ handleSubmit, banks, submitting, bankDetails, setBankDeta
                 className='form_input'
             />
             </label>
+            {errorMessage && (<p className='text-sm text-red-600 font-normal tracking-wide'>{errorMessage}</p>)}
 
             <label>
                 <span className='font-satoshi font-semibold text-base text-gray-700'>
