@@ -11,6 +11,7 @@ const page = () => {
   const searchParams = useSearchParams();
   const transactionReference = searchParams.get("trxref");
   const [product, setProduct] = useState();
+  const [transaction, setTransaction] = useState();
   const secretKey = 'sk_test_64b151dd8f9b5a6045cbe8bb03f0d39b3e201d82';
 
   useEffect(() => {
@@ -32,21 +33,24 @@ const page = () => {
       if (data.status == true) {
         const getProduct = await fetch(`/api/product/${data.data.metadata.productId}`);
         const getProductData = await getProduct.json();
-        
+        setTransaction(data);
+
         setProduct(getProductData);
         
-        // await fetch(`/api/payments/saveVerifiedTransaction`, {
-        //   method: "POST",
-        //   body: JSON.stringify({
-        //     paystackResult: data
-        //   }),
-        // })
+        await fetch(`/api/payments/saveVerifiedTransaction`, {
+          method: "POST",
+          body: JSON.stringify({
+            paystackResult: data
+          }),
+        })
         // // sendProductToEmail(session, getProductData)
         console.log(getProductData, 'getProductData');
       }
     };
 
-    fetchProducts();
+    if (transactionReference) {
+      fetchProducts();
+    }
   }, [transactionReference]); 
   
   return (
