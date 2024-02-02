@@ -1,6 +1,7 @@
 
 export const POST = async function (request) {
   const secretKey = process.env.PAYSTACK_SECRET_KEY;
+  const URL = process.env.NEXT_PUBLIC_URL;
   
   const { 
     customerEmail,
@@ -27,7 +28,7 @@ export const POST = async function (request) {
     const paystackData = {
       email: customerEmail,
       amount: price * 100, // Convert to kobo (NGN 100 = 10000 kobo),
-      callback_url: `http://localhost:3000/thankYou`,
+      callback_url: `${URL}/thankYou`,
       metadata: {
         productId, affiliateId, sellerId, commission
       }

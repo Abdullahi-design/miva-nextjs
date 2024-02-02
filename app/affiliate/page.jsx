@@ -7,6 +7,7 @@ import ProductCard from "@components/ProductCard";
 import { extractUserInfoFromAffiliateLink } from "@utils/generateAffiliateLink";
 import ProductCardSkeleton from "@components/skeletonLoader/ProductCardSkeleton";
 
+
 const AffiliateProduct = () => {
     const searchParams = useSearchParams();
     const productId = searchParams.get("id");
@@ -52,9 +53,10 @@ const AffiliateProduct = () => {
         if (affiliateLink) {
             
             const affiliateProductLink = extractUserInfoFromAffiliateLink(affiliateLink);
+            console.log(affiliateProductLink, 'affiliateProductLink');
             if (affiliateProductLink) {
 
-                const URL = 'http://localhost:3000';
+                const URL = process.env.NEXT_PUBLIC_URL;
                 navigator.clipboard.writeText(`${URL}/products/${affiliateProductLink.productId}?affiliateId=${affiliateProductLink.userId}`);
                 alert("Affiliate link copied to clipboard!");
 

@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
+require('dotenv').config()
 
-const JWT_TOKEN = 'jUf7tRGCDz8qPw4HLv4FipzktmItfj0Ig1YEu8WmQBY=';
-const URL = 'http://localhost:3000';
+const JWT_TOKEN = process.env.JWT_TOKEN;
+const URL = process.env.NEXT_PUBLIC_URL;
 
 const generateAffiliateLink = (userId, productId) => {
     const token = jwt.sign({ userId, productId }, JWT_TOKEN);
@@ -17,7 +18,7 @@ const extractUserInfoFromAffiliateLink = (affiliateLink) => {
         const { userId, productId } = decodedToken;
         
         // console.log(`Decoded User ID: ${userId}, Product ID: ${productId}`);
-        // console.log({userId, productId });
+        console.log({userId, productId }, {JWT_TOKEN});
         return { userId, productId }; // Return the decoded information
 
     } catch (error) {

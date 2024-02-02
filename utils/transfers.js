@@ -1,6 +1,10 @@
+require('dotenv').config()
+
 const makeTransfers = async () => {
+  const URL = process.env.NEXT_PUBLIC_URL;
+
   try {
-    const response = await fetch('http://localhost:3000/api/payments/fetchDayTransaction');
+    const response = await fetch(`${URL}/api/payments/fetchDayTransaction`);
     const paystackResponse = await response.json();
 
     // console.log('Paystack Response:', paystackResponse);
