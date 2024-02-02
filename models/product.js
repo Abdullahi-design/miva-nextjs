@@ -31,7 +31,7 @@ const ProductSchema = new Schema({
     },
     digitalProduct: {
         type: String,
-        required: [true, 'Digital Product is required.'],
+        // required: [true, 'Digital Product is required.'],
     },
     category: {
         type: String,
