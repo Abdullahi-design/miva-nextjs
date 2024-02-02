@@ -11,9 +11,9 @@ export const connectToDB = async () => {
     await mongoose.connect(process.env.MONGODB_URI, {
       dbName: "hudsuller",
       useNewUrlParser: true,
+      useUnifiedTopology: true
       // useFindAndModify: false,
       // useCreateIndex: true,
-      useUnifiedTopology: true,
     });
 
     console.log('MongoDB connected');
