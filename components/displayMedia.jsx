@@ -3,7 +3,7 @@ import Image from "next/image";
 export const displayMedia = (product) => {
     if (product.coverImage.startsWith("data:image")) {
       return (
-        <div className="rounded-lg overflow-hidden w-[20rem] h-[20rem] relative">
+        <div className="rounded-lg overflow-hidden md:w-[20rem] w-[18rem] md:h-[20rem] h-[18rem] relative">
           <Image
             src={product.coverImage}
             alt={product.productName}
