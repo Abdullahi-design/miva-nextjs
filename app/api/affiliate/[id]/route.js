@@ -40,6 +40,7 @@ export const PATCH = async (request, { params }) => {
 
         return new Response("Successfully updated the Products", { status: 200 });
     } catch (error) {
+        console.error("Error Updating Product:", error);
         return new Response("Error Updating Product", { status: 500 });
     }
 };
