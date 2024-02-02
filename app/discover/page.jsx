@@ -13,14 +13,14 @@ const AffiliatedProducts = () => {
 
     useEffect(() => {
         const fetchProducts = async () => {
-            const response = await fetch(`/api/product`);
+            const response = await fetch(`/api/product/discover`);
             const data = await response.json();
 
             // Filter products with commission greater than 0
-            const filteredProducts = data.filter(product => product.commission > 0);
+            // const filtdiscovereredProducts = data.filter(product => product.commission > 0);
 
-            setMyProducts(filteredProducts);
-            console.log(filteredProducts);
+            setMyProducts(data);
+            // console.log(data, 'data');
         };
 
         if (session?.user.id) fetchProducts();
