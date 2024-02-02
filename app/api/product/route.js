@@ -5,7 +5,7 @@ export const GET = async (request) => {
     try {
         await connectToDB()
 
-        const products = await Product.find({}).populate('creator')
+        const products = await Product.find({}).populate('creator').limit(6)
 
         return new Response(JSON.stringify(products), { status: 200 })
     } catch (error) {
