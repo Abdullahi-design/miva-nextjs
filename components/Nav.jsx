@@ -171,9 +171,9 @@ const Nav = () => {
             </>
           )}
         </div>
-        <div className='hidden sm:flex'>
+        {/* <div className='hidden sm:flex'>
           {session?.user && (<Cart/>)}
-        </div>
+        </div> */}
       </section>
     </nav>
   );

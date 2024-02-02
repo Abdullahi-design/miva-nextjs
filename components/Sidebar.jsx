@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { FiHome, FiBox, FiUsers, FiShoppingCart, FiBarChart2, FiMail, FiClipboard, FiMenu, FiX } from 'react-icons/fi';
 import { TbCurrencyNaira } from "react-icons/tb";
@@ -25,7 +25,7 @@ const Sidebar = () => {
     // { title: 'Affiliated products', icon: <FaGift />, href: '/discover' },
     { title: 'Discover', icon: <IoIosSearch />, href: '/discover' },
     { title: 'Payouts', icon: <TbCurrencyNaira  className='bg-white text-gray-800 rounded-full' />, href: '/payouts' },
-    { title: 'Cart', icon: <FiShoppingCart />, href: '/cart' },
+    // { title: 'Cart', icon: <FiShoppingCart />, href: '/cart' },
     // { title: 'Sales', icon: <FiShoppingCart />, href: '/sales' },
     // { title: 'Analytics', icon: <FiBarChart2 />, href: '/analytics' },
     // { title: 'Email', icon: <FiMail />, href: '/email' },
@@ -37,8 +37,8 @@ const Sidebar = () => {
       {/* Sidebar */}
       <nav
         className={`z-20 bg-gray-800 h-screen w-full fixed left-0 top-0 overflow-x-hidden ${
-          isSidebarOpen ? '' : 'md:block hidden'
-        } md:w-64 transition-all duration-300`}
+          isSidebarOpen ? '' : 'hidden'
+        } md:w-64 transition-all duration-300 md:block`}        
       >
         <div className="flex items-center justify-between p-4 border-b border-gray-700">
         <Link href='/' className='gap-2 flex-center'>
@@ -58,7 +58,10 @@ const Sidebar = () => {
         <div className="p-4">
           {menuItems.map((item, index) => (
             <Link href={item.href} key={index}>
-              <div className=" border-b p-2 py-5 border-gray-200 flex items-center text-gray-300 hover:bg-gray-700 transition duration-300">
+              <div 
+              className=" border-b p-2 py-5 border-gray-200 flex items-center text-gray-300 hover:bg-gray-700 transition duration-300"
+              onClick={() => setSidebarOpen(false)}
+              >
                 <span className="mr-2">{item.icon}</span>
                 {item.title}
               </div>
@@ -67,7 +70,10 @@ const Sidebar = () => {
         </div>
           {session?.user && (
             <Link href={'/profile'}>
-              <div className='p-4 bottom-0 text-gray-300 hover:bg-gray-700 transition duration-300 fixed flex gap-3 justify-between items-center'>
+              <div 
+              className='p-4 bottom-0 text-gray-300 hover:bg-gray-700 transition duration-300 fixed flex gap-3 justify-between items-center'
+              onClick={() => setSidebarOpen(false)}
+              >
                 <Image
                   src={session?.user.image}
                   width={37}
@@ -84,9 +90,7 @@ const Sidebar = () => {
 
       {/* Toggle button on top-right corner */}
       <button
-        className={`md:hidden fixed z-30 top-4 right-4 p-2 text-white bg-gray-800 rounded-md ${
-          isSidebarOpen ? 'md:hidden hidden' : ''
-        }`}
+        className={`md:hidden fixed z-30 top-4 right-4 p-2 text-white bg-gray-800 rounded-md`}
         onClick={toggleSidebar}
       >
         {isSidebarOpen ? <FiX /> : <FiMenu />}
