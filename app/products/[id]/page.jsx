@@ -2,7 +2,7 @@ import ProductInfo from "@components/ProductInfo";
 
 export async function generateStaticParams() {
   try {
-    const res = await fetch(`${process.env.URL}/api/product`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/product`);
     if (!res.ok || !res.headers.get('content-type')?.includes('application/json')) {
       throw new Error(`Failed to fetch products. Invalid response: ${res.status} ${res.statusText}`);
     }
@@ -24,7 +24,7 @@ export async function generateStaticParams() {
 
 export async function getProduct(id) {
   try {
-    const response = await fetch(`${process.env.URL}/api/product/${id}`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/product/${id}`);
     if (!response.ok) {
       throw new Error(`Failed to fetch product: ${response.status} ${response.statusText}`);
     }
