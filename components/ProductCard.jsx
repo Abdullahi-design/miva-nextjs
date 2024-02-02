@@ -72,13 +72,12 @@ const ProductCard = ({ product, handleAffiliateClick, generateAffiliateLink, Iss
 
         <p onClick={handleProductDetailsClick} className='my-4 font-satoshi text-sm text-gray-700'>{product.productName}</p>
         <div className="flex justify-between w-full">
-          <p
+          {/* <p
             className='font-inter text-sm blue_gradient cursor-pointer'
             onClick={() => handleMetaDataClick && handleMetaDataClick(product.metaData)}
           >
-            {/* remove if metaData starts with "#" */}
             #{product.metaData.replace(/^#/, '')}
-          </p>
+          </p> */}
           {pathName !== "/profile" && pathName !== "/discover" && pathName !== "/affiliate" && (
             <span className="w-fit -mt-1.5">
               <Button 
