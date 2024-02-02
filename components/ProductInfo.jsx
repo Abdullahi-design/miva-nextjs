@@ -43,7 +43,7 @@ const ProductInfo = ({ product }) => {
             >
               {product.cta}
             </Button>
-            <AddToCartButton product={product}/>
+            {/* <AddToCartButton product={product}/> */}
           </div>
         </div>
       </div>
