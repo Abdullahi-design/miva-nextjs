@@ -66,7 +66,7 @@ const MyProfile = () => {
     <>
       <Profile
         name='My'
-        desc='Welcome to your personalized profile page. Share your exceptional products and inspire others with the power of your imagination'
+        desc='Welcome to your personalized store. Share your exceptional products and inspire others.'
         data={myProducts}
         handleAffiliateClick={handleAffiliateClick}
         handleEdit={handleEdit}
