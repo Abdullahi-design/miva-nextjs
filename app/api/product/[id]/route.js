@@ -6,7 +6,9 @@ export const GET = async (request, { params }) => {
         await connectToDB()
 
         const product = await Product.findById(params.id).populate("creator")
-        if (!product) return new Response("Product Not Found", { status: 404 });
+        if (!product) {
+            return new Response(JSON.stringify({ error: "Product not found" }), { status: 404, headers: { "Content-Type": "application/json" } });
+        }
 
         return new Response(JSON.stringify(product), { status: 200 })
 
@@ -35,7 +37,7 @@ export const PATCH = async (request, { params }) => {
         const existingProduct = await Product.findById(params.id);
 
         if (!existingProduct) {
-            return new Response("Product not found", { status: 404 });
+            return new Response(JSON.stringify({ error: "Product not found" }), { status: 404, headers: { "Content-Type": "application/json" } });
         }
 
         // Update the product with new data
@@ -65,7 +67,7 @@ export const DELETE = async (request, { params }) => {
       const removedProduct = await Product.findOneAndDelete({ _id: params.id });
   
       if (!removedProduct) {
-        return new Response("Product not found", { status: 404 });
+        return new Response(JSON.stringify({ error: "Product not found" }), { status: 404, headers: { "Content-Type": "application/json" } });
       }
   
       return new Response("Product deleted successfully", { status: 200 });
