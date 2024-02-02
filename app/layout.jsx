@@ -21,7 +21,7 @@ const RootLayout = ({ children }) => {
 
                 <main className='app relative flex flex-col min-h-screen'>
                     <Nav/>
-                    {/* <Sidebar/> */}
+                    <Sidebar/>
                     <div className='flex-grow flex-1'>{children}</div>
                     <Footer/>
                 </main>
