@@ -49,14 +49,30 @@ const Form = ({ type, desc, formData, setFormData, submitting, handleChange, han
         >
             <label>
                 <span className='font-satoshi font-semibold text-base text-gray-700'>
+                Course Code{" "}
+                </span>
+                <input
+                    type="text"
+                    name="courseCode"
+                    value={formData.courseCode}
+                    // onChange={handleChange}
+                    onChange={(e) => setFormData({ ...formData, courseCode: e.target.value })}
+                    required
+                    placeholder='Course Code'
+                    className='form_input'
+                />
+            </label>
+
+            <label>
+                <span className='font-satoshi font-semibold text-base text-gray-700'>
                 Course Title{" "}
                 </span>
                 <input
                     type="text"
-                    name="name"
-                    value={formData.name}
+                    name="courseName"
+                    value={formData.courseName}
                     // onChange={handleChange}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    onChange={(e) => setFormData({ ...formData, courseName: e.target.value })}
                     required
                     placeholder='Course Name'
                     className='form_input'
@@ -131,7 +147,7 @@ const Form = ({ type, desc, formData, setFormData, submitting, handleChange, han
                     value={formData.quiz.map((q) => `${q.text}|${q.options[0]}|${q.options[1]}|${q.correctAnswer}`).join(',')}
                     onChange={handleQuizChange}
                     required
-                    placeholder="Enter quiz questions separated by commas, with options separated by '|', and correct answer separated by '|', Example: 'Which planet is known as the Red Planet?|Mars|Venus|Mars' "
+                    placeholder="Enter quiz questions separated by commas, with options separated by '|', and correct answer separated by '|', Example: 'What does the acronym 'HTTP' stand for?|Hypertext Transfer Protocol|Hypertext Transfer Process|Hypertext Technical Process' "
                     className="form_textarea"
                 />
             </label>

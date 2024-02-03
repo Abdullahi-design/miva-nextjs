@@ -1,9 +1,13 @@
 import { Schema, model, models } from 'mongoose';
 
 const CoursesSchema = new Schema({
-    name: {
+    courseCode: {
         type: String,
-        required: [true, 'name of Courses are required.'],
+        required: [true, 'course code is required.'],
+    },
+    courseName: {
+        type: String,
+        required: [true, 'course name is required.'],
     },
     videos: {
         type: String,

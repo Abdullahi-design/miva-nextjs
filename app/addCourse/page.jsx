@@ -7,9 +7,10 @@ export default function Home() {
 
   const [submitting, setIsSubmitting] = useState(false);
     const [formData, setFormData] = useState({
-      name: '',
-      videos: '',
-      note: '',
+      courseCode: "",
+      courseName: "",
+      videos: "",
+      note: "",
       quiz: [],
     });
 

@@ -22,7 +22,6 @@ const Sidebar = () => {
 
   return (
     <>
-      {/* Sidebar */}
       <nav
         className={`z-20 bg-gray-800 h-screen w-full fixed left-0 top-0 overflow-x-hidden ${
           isSidebarOpen ? '' : 'hidden'
@@ -31,13 +30,12 @@ const Sidebar = () => {
         <div className="flex items-center justify-between p-4 border-b border-gray-700">
         <Link href='/' className='gap-2 flex-center'>
           <Image
-            src='/assets/images/hudsuller_logo_light.png'
+            src='/assets/images/miva-white.jpeg'
             alt='logo'
             width={150}
             height={150}
             className='object-contain'
           />
-          {/* <p className='logo_text'>Hudsuller</p> */}
         </Link>
           <button className="text-white" onClick={toggleSidebar}>
             <FiX />

@@ -4,7 +4,7 @@ import { connectToDB } from "@utils/database";
 export const POST = async (request) => {
 
     // Destructure data from the request body
-    const { name, videos, note, quiz } = await request.json();
+    const { courseCode, courseName, videos, note, quiz } = await request.json();
 
     try {
         // console.log(name, videos, note, quiz);
@@ -13,7 +13,8 @@ export const POST = async (request) => {
 
         // Create a new course instance
         const newCourse = new Courses({
-            name,
+            courseCode,
+            courseName,
             videos,
             note,
             quiz,
