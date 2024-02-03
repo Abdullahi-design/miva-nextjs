@@ -2,7 +2,7 @@ import ProductInfo from "@components/ProductInfo";
 
 export async function generateStaticParams() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/product`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/courses`);
     if (!res.ok || !res.headers.get('content-type')?.includes('application/json')) {
       throw new Error(`Failed to fetch products. Invalid response: ${res.status} ${res.statusText}`);
     }

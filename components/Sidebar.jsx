@@ -17,6 +17,7 @@ const Sidebar = () => {
   const menuItems = [
     { title: 'Home', icon: <FiHome />, href: '/' },
     { title: 'Courses', icon: <FiBox />, href: '/courses' },
+    { title: 'Add Course', icon: <FiBox />, href: '/addCourse' },
   ];
 
   return (
