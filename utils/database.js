@@ -9,7 +9,7 @@ export const connectToDB = async () => {
   try {
     
     await mongoose.connect(process.env.MONGODB_URI, {
-      dbName: "hudsuller",
+      dbName: "miva-test",
       useNewUrlParser: true,
       useUnifiedTopology: true
       // useFindAndModify: false,

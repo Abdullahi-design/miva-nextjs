@@ -1,10 +1,9 @@
 "use client";
 
-import Link from "next/link";
+import { getProviders, signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
-import { signIn, signOut, useSession, getProviders } from "next-auth/react";
-import Cart from "./Cart";
 
 const Nav = () => {
   const { data: session } = useSession();

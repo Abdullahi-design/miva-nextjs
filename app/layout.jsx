@@ -6,8 +6,8 @@ import Footer from '@components/Footer';
 import Sidebar from '@components/Sidebar';
 
 export const metadata = {
-    title: 'Hudsuller',
-    description: "Africa's first B2C e-commerce platform that allows creators to sell products directly to their audience."
+    title: 'Miva EdTech',
+    description: "Miva EdTech Assessment."
 }
 
 const RootLayout = ({ children }) => {
