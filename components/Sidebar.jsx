@@ -13,6 +13,10 @@ const Sidebar = () => {
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
   };
+  
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
 
   const menuItems = [
     { title: 'Home', icon: <FiHome />, href: '/' },
@@ -37,16 +41,16 @@ const Sidebar = () => {
             className='object-contain'
           />
         </Link>
-          <button className="text-white" onClick={toggleSidebar}>
+          {/* <button className="text-white" onClick={toggleSidebar}>
             <FiX />
-          </button>
+          </button> */}
         </div>
         <div className="p-4">
           {menuItems.map((item, index) => (
             <Link href={item.href} key={index}>
               <div 
               className=" border-b p-2 py-5 border-gray-200 flex items-center text-gray-300 hover:bg-gray-700 transition duration-300"
-              onClick={() => setSidebarOpen(false)}
+              onClick={closeSidebar}
               >
                 <span className="mr-2">{item.icon}</span>
                 {item.title}
@@ -58,7 +62,7 @@ const Sidebar = () => {
             <Link href={'/profile'}>
               <div 
               className='p-4 bottom-0 text-gray-300 hover:bg-gray-700 transition duration-300 fixed flex gap-3 justify-between items-center'
-              onClick={() => setSidebarOpen(false)}
+              onClick={closeSidebar}
               >
                 <Image
                   src={session?.user.image}

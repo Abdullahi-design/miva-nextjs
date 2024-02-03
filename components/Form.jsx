@@ -1,30 +1,13 @@
 "use client";
 
 import React, { useState } from 'react'
-import { MdOutlineFileUpload } from "react-icons/md";
-import { displayMedia } from './displayMedia';
+import { CldUploadButton } from 'next-cloudinary';
+
 import Link from 'next/link';
 
 const Form = ({ type, desc, formData, setFormData, submitting, handleChange, handleSubmit }) => {
     
-  const [file, setFile] = useState(undefined);
-
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        setFile(file)
-        if (file) {
-        // Read the selected image file and convert it to a data URL
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            setFormData({
-            ...formData,
-            videos: reader.result,
-            imagePreview: reader.result,
-            });
-        };
-        reader.readAsDataURL(file);
-        }
-    };  
+  const [imageId, setImageId] = useState("");
 
     const handleQuizChange = (e) => {
         const quizData = e.target.value.split(',').map((question) => {
@@ -34,6 +17,8 @@ const Form = ({ type, desc, formData, setFormData, submitting, handleChange, han
     
         setFormData({ ...formData, quiz: quizData });
     };    
+
+    console.log(imageId, '*************');
 
   return (
     <section className='w-full max-w-full flex-start flex-col'>
@@ -83,63 +68,31 @@ const Form = ({ type, desc, formData, setFormData, submitting, handleChange, han
                 <span className='font-satoshi font-semibold text-base text-gray-700'>
                     Upload Course Video {" "}
                 </span>
-                {
-                    formData.videos ? 
-                    (
-                    null
-                    ):(
-                    <span className="text-center py-2 text-sm text-gray-500">Video should be of good quility.</span>
-                    )
-                }
-                <input
-                    type="file"
-                    // value={formData.videos}
-                    // onChange={handleChange}
-                    onChange={(e) => handleImageChange(e)}
-                    accept="image/jpeg, image/png, image/webp, image/gif, video/mp4, video/webm"
-                    required
-                    className='hidden'
-                    id='videosInput'
+
+                <CldUploadButton 
+                uploadPreset="miva-test" 
+                onUpload={(result) =>{
+                    setImageId(result?.info?.secure_url);
+                    setFormData({
+                        ...formData,
+                        videos: result?.info?.secure_url,
+                    });
+                }}
                 />
-                <label
-                    htmlFor='videosInput'
-                    className='flex w-fit cursor-pointer bg-blue-500 text-white py-2 px-4 rounded-md transition duration-300 ease-in-out hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800'
-                >
-                    <span className="">
-                    <MdOutlineFileUpload className="w-6 h-6"/>
-                    </span>
-                    Upload Video
-                </label>
-                {formData.videos && file && (
-                    <div className="flex gap-4 mt-2 items-center">
-                        {displayMedia(formData)}
-                        <button
-                            type="button"
-                            className="border rounded-xl px-4 py-2"
-                            onClick={() => {
-                            setFile(undefined)
-                            }}
+
+
+                {imageId && (
+                    <div className="rounded-lg overflow-hidden w-[20rem] h-[20rem] relative">
+                        <video  
+                        className="object-cover" 
+                        autoPlay loop muted controls
                         >
-                            remove
-                        </button>
+                        <source src={imageId} type='video/mp4' />
+                        Your browser does not support the video tag.
+                        </video>
                     </div>
                 )}
             </label>
-
-            {/* <label>
-                <span className='font-satoshi font-semibold text-base text-gray-700'>
-                    Your Prodcut description
-                </span>
-
-                <textarea
-                    value={formData.note}
-                    // onChange={(e) => setFormData({ ...formData, note: e.target.value })}
-                    onChange={handleChange}
-                    placeholder='Write your note here'
-                    required
-                    className='form_textarea '
-                />
-            </label> */}
 
             <label>
                 Quiz:
