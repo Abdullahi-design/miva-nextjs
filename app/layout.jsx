@@ -19,11 +19,13 @@ const RootLayout = ({ children }) => {
                     <div className='gradient' />
                 </div>
 
-                <main className='app relative flex flex-col min-h-screen'>
-                    <Nav/>
+                <main className=''>
                     <Sidebar/>
-                    <div className='flex-grow flex-1'>{children}</div>
-                    <Footer/>
+                    <div className='app relative flex flex-col min-h-screen'>
+                        <Nav/>
+                        <div className='flex-grow flex-1'>{children}</div>
+                        <Footer/>
+                    </div>
                 </main>
             </Provider>
         </body>

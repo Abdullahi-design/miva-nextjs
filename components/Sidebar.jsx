@@ -1,12 +1,10 @@
 "use client";
-import { useState } from 'react';
 import Link from 'next/link';
-import { FiHome, FiBox, FiUsers, FiMenu, FiX } from 'react-icons/fi';
-import { TbCurrencyNaira } from "react-icons/tb";
+import { useState } from 'react';
+import { FiBox, FiHome, FiMenu, FiX } from 'react-icons/fi';
 
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import { IoIosSearch } from 'react-icons/io';
 
 const Sidebar = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -18,10 +16,7 @@ const Sidebar = () => {
 
   const menuItems = [
     { title: 'Home', icon: <FiHome />, href: '/' },
-    { title: 'Create Product', icon: <FiBox />, href: '/create-product' },
-    { title: 'Affiliate', icon: <FiUsers />, href: '/affiliate' },
-    { title: 'Discover', icon: <IoIosSearch />, href: '/discover' },
-    { title: 'Payouts', icon: <TbCurrencyNaira  className='bg-white text-gray-800 rounded-full' />, href: '/payouts' },
+    { title: 'Courses', icon: <FiBox />, href: '/courses' },
   ];
 
   return (
