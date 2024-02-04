@@ -13,10 +13,9 @@ const CoursesSchema = new Schema({
         type: String,
         required: [true, 'videos are required.'],
     },
-    note: {
-        type: String,
-        // required: [true, 'note is required.'],
-    },
+    // note: [{
+    //     type: String,
+    // }],
     quiz: [{
         text: String,
         options: [String],

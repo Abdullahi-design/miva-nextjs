@@ -1,11 +1,12 @@
-import Courses from "@models/courses";
+
+import Note from "@models/note";
 import { connectToDB } from "@utils/database";
 
 export const GET = async (request) => {
     try {
         await connectToDB()
 
-        const courses = await Courses.find({})
+        const courses = await Note.find({})
 
         return new Response(JSON.stringify(courses), { status: 200 })
     } catch (error) {

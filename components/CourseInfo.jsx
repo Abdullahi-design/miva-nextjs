@@ -1,7 +1,19 @@
-import React from 'react'
+"use client";
+
+import React, { useState } from 'react'
+import CourseNote from './CourseNote';
 
 const CourseInfo = ({course}) => {
-    console.log(course);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleTakeNote = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
+    
   return (
     <div className="relative border my-4 p-4 mb-4 rounded-md shadow-md">
         <div className='mb-2 p-1.5 flex justify-center gap-5'>
@@ -16,8 +28,20 @@ const CourseInfo = ({course}) => {
         </div>
         <div className='flex mt-4 justify-around'>
             <button className='quiz_btn'>Take Quiz</button>
-            <button className='black_btn'>Take Note</button>
+            <button 
+            className='black_btn'
+            onClick={handleTakeNote}
+            >
+                Take Note
+            </button>
         </div>
+
+        {/* Modal */}
+        {isModalOpen && (
+            <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50">
+            <CourseNote course={course} onClose={handleCloseModal} />
+            </div>
+        )}
     </div>
   )
 }

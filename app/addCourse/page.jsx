@@ -6,13 +6,12 @@ import { useState } from "react";
 export default function Home() {
 
   const [submitting, setIsSubmitting] = useState(false);
-    const [formData, setFormData] = useState({
-      courseCode: "",
-      courseName: "",
-      videos: "",
-      note: "",
-      quiz: [],
-    });
+  const [formData, setFormData] = useState({
+    courseCode: "",
+    courseName: "",
+    videos: "",
+    quiz: [],
+  });
 
     const handleChange = (e) => {
       setFormData({

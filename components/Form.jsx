@@ -18,8 +18,6 @@ const Form = ({ type, desc, formData, setFormData, submitting, handleChange, han
         setFormData({ ...formData, quiz: quizData });
     };    
 
-    console.log(imageId, '*************');
-
   return (
     <section className='w-full max-w-full flex-start flex-col'>
         <h1 className='head_text text-left'>

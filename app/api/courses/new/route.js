@@ -4,10 +4,10 @@ import { connectToDB } from "@utils/database";
 export const POST = async (request) => {
 
     // Destructure data from the request body
-    const { courseCode, courseName, videos, note, quiz } = await request.json();
+    const { courseCode, courseName, videos, quiz } = await request.json();
 
     try {
-        // console.log(name, videos, note, quiz);
+        // console.log(name, videos, quiz);
         // Connect to the database
         await connectToDB();
 
@@ -16,7 +16,6 @@ export const POST = async (request) => {
             courseCode,
             courseName,
             videos,
-            note,
             quiz,
         });
 

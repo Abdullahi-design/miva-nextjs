@@ -1,4 +1,6 @@
 import CourseInfo from "@components/CourseInfo";
+import CourseNote from "@components/CourseNote";
+import DisplayNote from "@components/DisplayNote";
 
 export async function generateStaticParams() {
   try {
@@ -39,7 +41,7 @@ export async function getCourse(id) {
 
 export default async function Page({ params }) {
   const course = await getCourse(params.id);
-  console.log(params, course, 'here');
+  // console.log(params, course, 'here');
 
   if (!course) {
     // Handle the case when the course is not available
@@ -47,9 +49,15 @@ export default async function Page({ params }) {
   }
 
   return (
-    <CourseInfo 
+    <>
+      <CourseInfo 
+        key={course._id}
+        course={course}
+      />
+      <DisplayNote
       key={course._id}
       course={course}
-    />
+      />
+    </>
   );
 }

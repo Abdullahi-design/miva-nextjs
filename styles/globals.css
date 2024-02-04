@@ -75,7 +75,7 @@
 }
 
 .black_btn {
-  @apply rounded-md border border-black bg-black md:py-3 py-1.5 px-5 md:px-5 px-3 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center;
+  @apply rounded-md border border-black bg-black md:py-3 py-1.5 md:px-5 px-3 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center;
 }
 
 .quiz_btn {
@@ -91,6 +91,14 @@
 
 .blue_gradient {
   @apply bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent;
+}
+
+.orange_gradient {
+  @apply bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent;
+}
+
+.green_gradient {
+  @apply bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent;
 }
 
 .desc {
