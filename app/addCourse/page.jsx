@@ -1,9 +1,12 @@
 "use client";
 
 import Form from "@components/Form";
+import AuthBtn from "@components/ui/AuthBtn";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 
 export default function Home() {
+  const {data: session} = useSession();
 
   const [submitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -54,14 +57,23 @@ export default function Home() {
   };
 
   return (
-    <Form
-      type='Create'
-      desc='create a student course'
-      formData={formData}
-      setFormData={setFormData}
-      handleChange={handleChange}
-      submitting={submitting}
-      handleSubmit={handleSubmit}
-    />
+    <>
+    {session ? (
+      <Form
+        type='Create'
+        desc='create a student course'
+        formData={formData}
+        setFormData={setFormData}
+        handleChange={handleChange}
+        submitting={submitting}
+        handleSubmit={handleSubmit}
+      />
+      ):(
+        <div>
+          <h1 className="font-bold text-3xl my-32">Signin to continue</h1>
+          <AuthBtn/>
+        </div>
+      )}
+    </>
   );
 }
