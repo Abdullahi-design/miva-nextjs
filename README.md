@@ -1,38 +1,64 @@
-Miva Assessment Full-Stack built with NextJs
+# Course Management System
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+I have developed a frontend form that empowers administrators to create courses. Subsequently, I upload the course videos to Cloudinary and save the video URL, along with the course details, to a MongoDB database. This approach optimizes speed, reduces caching requirements, and minimizes server time by storing only the video URL in a NoSQL database.
 
-## Getting Started
+To enhance user navigation, I implemented a sidebar containing links to retrieve information about all registered courses. Upon clicking on the details of a specific course, the web application fetches the course details from the MongoDB database. The course video, previously fetched from MongoDB, is then displayed by passing its URL to an HTML5 video tag. This method eliminates the need to fetch the video again from Cloudinary, contributing to a faster and more efficient user experience.
 
-First, run the development server:
+In addition, I incorporated basic CRUD (Create, Read, Update, Delete) operations for managing user notes in the note section. This functionality allows users to create, edit, and delete their notes, contributing to a more interactive and personalized learning environment.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This comprehensive approach ensures an optimized, responsive, and user-friendly web application for administrators, instructors, and learners alike.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Web Application README
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Design Patterns, Coding Principles, or Standards Used
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. **MVC Architecture:**
+   - **Where:** Implemented in the overall structure of the application.
+   - **Why:** Facilitates the separation of concerns, promoting modularity and maintainability.
 
-## Learn More
+2. **Next OAuth:**
+   - **Where:** `/app/api/[...nextauth]/route.js`
+   - **Why:** Used for secure user authentication and authorization, ensuring standardized and secure user sessions.
 
-To learn more about Next.js, take a look at the following resources:
+3. **RESTful API Design:**
+   - **Where:** Applied to the creation of API endpoints.
+   - **Why:** Ensures standardized and scalable communication between the front end and back end, promoting interoperability.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. **Singleton Pattern:**
+   - **Where:** Implemented for database connections.
+   - **Why:** Ensures a single, shared instance of the database connection, optimizing resource usage and managing connections effectively.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+5. **Cloudinary for Image Upload:**
+   - **Where:** Integrated into the image upload functionality.
+   - **Why:** Utilized for efficient image storage and management, offering a reliable cloud-based solution for image uploads.
 
-## Deploy on Vercel
+## User Journeys
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Login:**
+  - Users initiate their journey by logging into the web application.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **Courses Section in Sidebar:**
+  - Overview: The sidebar prominently presents a dedicated "Courses" section for easy access.
+  - Functionality: Users can effortlessly navigate to the Courses section through the sidebar.
+
+- **Course Listing:**
+  - Dynamic Rendering: Upon selecting the "Courses" section, the frontend dynamically generates and displays a list of available courses.
+  - User-Friendly Presentation: The course listing is designed for clarity and user-friendliness.
+
+- **Course Details Page:**
+  - Triggering Course Details: Clicking on a specific course within the listing initiates the rendering of the detailed course page.
+  - Information Retrieval: The frontend actively fetches and displays comprehensive information about the selected course, including video content, study notes, and available quizzes.
+
+## Technologies Used
+
+- **Frontend:** [Next.js](https://nextjs.org/) for building the user interface.
+- **Backend:** [Node.js](https://nodejs.org/) for server-side logic.
+- **Database:** [MongoDB](https://www.mongodb.com/) for storing course details and user notes.
+- **Cloud Service:** [Cloudinary](https://cloudinary.com/) for efficient video and image storage.
+
+## Setup Instructions
+
+1. Clone the repository: `git clone [repository_url]`.
+2. Navigate to the project directory: `cd course-management-system`.
+3. Install dependencies: `npm install`.
+4. Start the application: `npm start`.
