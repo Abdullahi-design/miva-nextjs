@@ -58,7 +58,7 @@ This comprehensive approach ensures an optimized, responsive, and user-friendly 
 
 ## Setup Instructions
 
-1. Clone the repository: `git clone [repository_url]`.
-2. Navigate to the project directory: `cd course-management-system`.
+1. Clone the repository: `git clone [git@github.com:Abdullahi-design/miva-nextjs.git]`.
+2. Navigate to the project directory: `cd miva-nextjs`.
 3. Install dependencies: `npm install`.
-4. Start the application: `npm start`.
+4. Start the application: `npm run dev`.
