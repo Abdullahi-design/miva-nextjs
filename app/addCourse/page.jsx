@@ -69,8 +69,8 @@ export default function Home() {
         handleSubmit={handleSubmit}
       />
       ):(
-        <div>
-          <h1 className="font-bold text-3xl my-32">Signin to continue</h1>
+        <div className="mx-auto text-center justify-center my-32">
+          <h1 className="font-bold text-3xl my-4">Signin to continue</h1>
           <AuthBtn/>
         </div>
       )}

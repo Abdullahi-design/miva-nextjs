@@ -17,8 +17,8 @@ const AuthBtn = () => {
   }, []);
 
   return (
-    <section className="flex absolute z-30 top-6 right-4">
-      <div className='sm:flex hidden'>
+    <section className="">
+      <div className=''>
         {session?.user ? (
           <button type='button' onClick={signOut} className='outline_btn'>
             Sign Out

@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react'
 const DisplayNote = ({course}) => {
   const { data: session } = useSession();
   const courseId = course?._id;
+  const loggedInUser = session?.user.id;
   const [notes, setNotes] = useState([])
   const [loading, setLoading] = useState(true);
 
@@ -100,7 +101,7 @@ const DisplayNote = ({course}) => {
           </h1>
           <div className='grid gap-4 md:grid-cols-3 grid-cols-1'>
             {notes
-              .filter((courseNote) => courseNote.courseId === courseId) // Filter notes by courseId
+              .filter((courseNote) => courseNote.courseId === courseId && courseNote.creator === loggedInUser) // Filter notes by courseId
               .map((courseNote) => (
               <div key={courseNote._id} className='border my-4 p-6 mb-4 rounded-md shadow-md'>
                 <ul className='list-disc px-2'>

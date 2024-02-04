@@ -19,8 +19,9 @@ const Nav = () => {
           />
         </Link>
       </div>
-
-      <AuthBtn/>
+      <div className="sm:flex hidden">
+        <AuthBtn/>
+      </div>
     </nav>
   );
 };
